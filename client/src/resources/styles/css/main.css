@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto';
+}
+
+.logo {
+  font-weight: 300;
+  display: inline-block;
+}
+
+hr {
+  width: 100%;
+  border: 1px solid #272b35;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+nav {
+  padding: 0 2rem;
+}
+
+.MuiListItemButton-root {
+  padding: 0.75rem 3rem !important;
+}
+/*# sourceMappingURL=main.css.map */
