@@ -14,7 +14,6 @@ const Side = styled(Paper)(({ theme }) => ({
   borderRadius: '0px',
   color: '#fff',
   backgroundColor: '#111827',
-  //position: 'fixed'
 }));
 
 const SideBar: React.FC = () => {

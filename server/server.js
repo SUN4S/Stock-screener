@@ -5,7 +5,6 @@ const stockTime = require('./routes/time');
 const endpoint = require('./routes/endpoint');
 
 require('dotenv').config();
-console.log(process.env.ALPHA_VANTAGE_API);
 // middleware
 app.use(express.json());
 
