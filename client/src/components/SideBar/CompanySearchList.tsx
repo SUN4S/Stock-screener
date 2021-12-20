@@ -25,8 +25,8 @@ export const CompanySearchList: React.FC = () => {
         <ListItemButton
           component="a"
           href="#"             
-          selected={selectedIndex === 9}
-          onClick={(event: any) => handleListItemClick(event, 9)}
+          selected={selectedIndex === 6}
+          onClick={(event: any) => handleListItemClick(event, 6)}
           >
           <ListItemIcon>
             <SearchOutlinedIcon style={{ color: '#fff', float: 'right', fontSize: '2rem' }} />

@@ -1,13 +1,16 @@
 import activeReducer from '../features/activeSlice';
 import { configureStore } from '@reduxjs/toolkit';
 import searchReducer from '../features/searchSlice';
-import typeReducer from '../features/typeSlice';
 import { TypedUseSelectorHook, useSelector } from "react-redux";
+import incomeReducer from '../features/incomeSlice';
+import balanceReducer from '../features/balanceSlice';
 
 export const store = configureStore({
   reducer: {
     active: activeReducer,
-    search: searchReducer
+    search: searchReducer,
+    income: incomeReducer,
+    balance: balanceReducer
   },
 })
 

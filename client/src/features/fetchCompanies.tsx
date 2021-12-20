@@ -18,7 +18,7 @@ export const fetchCompanies = createAsyncThunk<
     await console.log(data);
 
     // Check if status is not okay:
-    if (!data) {
+    if (!data["bestMatches"]) {
       // Return the error message:
       return thunkApi.rejectWithValue({ 
         message: "Failed to fetch company list." 

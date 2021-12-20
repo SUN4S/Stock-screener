@@ -43,8 +43,8 @@ export const FundamentalList: React.FC = () => {
               sx={{ pl: 12 }} 
               component="a"
               href="#"
-              selected={selectedIndex === 4}
-              onClick={(event: any) => handleListItemClick(event, 4)}
+              selected={selectedIndex === 1}
+              onClick={(event: any) => handleListItemClick(event, 1)}
               >
               <ListItemText primary="Income Statement" />
             </ListItemButton>
@@ -54,8 +54,8 @@ export const FundamentalList: React.FC = () => {
               sx={{ pl: 12 }}
               component="a"
               href="#"           
-              selected={selectedIndex === 5}
-              onClick={(event: any) => handleListItemClick(event, 5)}
+              selected={selectedIndex === 2}
+              onClick={(event: any) => handleListItemClick(event, 2)}
               >
               <ListItemText primary="Balance Sheet" />
             </ListItemButton>
@@ -65,8 +65,8 @@ export const FundamentalList: React.FC = () => {
               sx={{ pl: 12 }}
               component="a"
               href="#"             
-              selected={selectedIndex === 6}
-              onClick={(event: any) => handleListItemClick(event, 6)}
+              selected={selectedIndex === 3}
+              onClick={(event: any) => handleListItemClick(event, 3)}
               >              
               <ListItemText primary="Cash Flow" />
             </ListItemButton>
@@ -75,8 +75,8 @@ export const FundamentalList: React.FC = () => {
             <ListItemButton sx={{ pl: 12 }}
               component="a"
               href="#"             
-              selected={selectedIndex === 7}
-              onClick={(event: any) => handleListItemClick(event, 7)}
+              selected={selectedIndex === 4}
+              onClick={(event: any) => handleListItemClick(event, 4)}
               >
               <ListItemText primary="Earnings" />
             </ListItemButton>
@@ -85,8 +85,8 @@ export const FundamentalList: React.FC = () => {
             <ListItemButton sx={{ pl: 12 }}
               component="a"
               href="#"             
-              selected={selectedIndex === 8}
-              onClick={(event: any) => handleListItemClick(event, 8)}
+              selected={selectedIndex === 5}
+              onClick={(event: any) => handleListItemClick(event, 5)}
               >
               <ListItemText primary="Overview" />
             </ListItemButton>

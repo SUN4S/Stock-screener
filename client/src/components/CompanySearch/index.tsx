@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import LoadingButton from '@mui/lab/LoadingButton';
-import { useParams } from 'react-router-dom';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useTypedSelector } from "../../app/store";
 import { fetchCompanies } from '../../features/fetchCompanies';
 import { selectStatus } from '../../features/searchSlice';
 import { SearchList } from './SearchList';
-import { typeSet } from '../../features/typeSlice';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 
@@ -33,11 +31,9 @@ const Header = styled(Paper)(({theme}) => ({
 
 const CompanySearch: React.FC = () => {
   const [input, setInput] = useState<string | any>();
-  const { type } = useParams();
 
   const dispatch = useDispatch();
   const status = useTypedSelector(selectStatus);
-  dispatch(typeSet(type));
 
   const handleClick = async (input: string | any) => {  
     dispatch(fetchCompanies(input));

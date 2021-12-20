@@ -31,7 +31,7 @@ export const SearchList: React.FC = () => {
     <div className="searchResult">
       {!search
         ? <h1>No data</h1> 
-        : search["bestMatches"].filter((item: any, idx: any) => idx < 6).map((match: any, i: any) => {
+        : search.bestMatches.filter((item: any, idx: any) => idx < 6).map((match: any, i: any) => {
         return(
           <Tooltip title="Copy symbol to clipboard" arrow>
             <Item key={i} onClick={() => navigator.clipboard.writeText(match["1. symbol"])}>            

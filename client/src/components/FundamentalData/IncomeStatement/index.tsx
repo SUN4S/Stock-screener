@@ -5,10 +5,13 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import LoadingButton from '@mui/lab/LoadingButton';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import NativeSelect from '@mui/material/NativeSelect';
-import AwesomeSlider from 'react-awesome-slider';
+
+import { RootState } from '../../../app/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchFundamentalsIncome } from '../../../features/fetchFundamentals';
+import { IncomeAnnualList } from './IncomeAnnualList';
+import { IncomeQuarterlyList } from './IncomeQuarterlyList';
 
 const Header = styled(Paper)(({theme}) => ({
   height: '10vh',
@@ -45,12 +48,19 @@ const Container = styled(Paper)(({ theme }) => ({
 }));
 
 export const IncomeStatement = () => {
-  const [input, setInput] = useState<String>();
+  const [input, setInput] = useState<string>();
   const [select, setSelect] = useState<string>("annualReports");
-  
+  const incomeData = useSelector((state: RootState) => state.income.data);
+
+  const dispatch = useDispatch();
+
   const handleChange = (event: SelectChangeEvent) => {
-    setSelect(event.target.value as string);
+    setSelect(event.target.value);
   };
+
+  const handleClick = (input: string | any) => {
+    dispatch(fetchFundamentalsIncome(input));
+  }
 
   return (
     <>
@@ -58,18 +68,17 @@ export const IncomeStatement = () => {
         <Header>
           <div className='headerText'>
             <h1>Income Statement Data</h1>
-            <p>Seach for a company by entering a keyword or anything you can think of.</p>
+            <p>Seach for a Comapnys' Income Statement Data</p>
           </div>
           <div className='searchInput'>
           <FormControl sx={{ m:1, minWidth: 120}}>          
             <Select
-              defaultValue={"annualReports"}
               value={select}
               sx={{ color: "primary.main" }}
               onChange={handleChange}
             >
-              <MenuItem value={"annualReports"} selected>Anual</MenuItem>
-              <MenuItem value={"quarterlyReports"}>Quarterly</MenuItem>
+              <MenuItem value={"annualReports"} >Annual</MenuItem>
+              <MenuItem value={"quarterlyReports"} >Quarterly</MenuItem>
             </Select>
           </FormControl>
             <div className="form__group field">
@@ -87,6 +96,7 @@ export const IncomeStatement = () => {
             <LoadingButton
               loadingPosition="center"
               variant="outlined"
+              onClick={() => handleClick(input)}
             >
               <SearchOutlinedIcon />
             </LoadingButton>
@@ -96,12 +106,13 @@ export const IncomeStatement = () => {
       </div>
       <div className="incomeContainer">
         <Container>
-          <AwesomeSlider infinite={false} bullets={false} selected={3} className='sliderContainer'>
-            <div className='item'><h1>First</h1></div>
-            <div className='item'><h1>Second</h1></div>
-            <div className='item'><h1>Third</h1></div>
-            <div className='item'><h1>Fourth</h1></div>
-          </AwesomeSlider>
+          <div className="titleContainer">
+            <h2>Company Symbol: {incomeData.symbol}</h2>
+          </div>
+          {
+            select === "annualReports" ? <IncomeAnnualList /> : <IncomeQuarterlyList />
+          }
+            
         </Container>
       </div>   
     </>
