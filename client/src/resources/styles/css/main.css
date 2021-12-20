@@ -77,7 +77,7 @@ nav {
 
 .searchContainer .searchInput .form__group {
   position: relative;
-  padding: 15px 0 0;
+  padding: 7px 0 0;
   margin-right: 5px;
   width: 60%;
   height: 100%;
@@ -90,10 +90,10 @@ nav {
   border: 0;
   border-bottom: 2px solid #9b9b9b;
   outline: 0;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   font-weight: 300;
   color: #fff;
-  padding: 7px 0 0px;
+  padding: 17px 0 0px;
   background: transparent;
   transition: border-color 0.2s;
 }
@@ -105,7 +105,7 @@ nav {
 .searchContainer .searchInput .form__field:placeholder-shown ~ .form__label {
   font-size: 1.3rem;
   cursor: text;
-  top: 17px;
+  top: 18px;
 }
 
 .searchContainer .searchInput .form__label {
@@ -279,7 +279,7 @@ nav {
 .searchInput {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   height: 40%;
   width: 35%;
   /* reset input */
@@ -458,86 +458,319 @@ nav {
   text-align: end;
 }
 
-.headerText {
-  width: 50%;
-  text-align: left;
-}
-
-.searchInput {
+.cashFlowContainer {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  height: 40%;
-  width: 35%;
-  /* reset input */
+  justify-content: center;
 }
 
-.searchInput .form__group {
+.cashFlowContainer .titleContainer {
+  height: 3%;
+  background-color: #42A5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cashFlowContainer .titleContainer h2 {
+  color: #000;
+}
+
+.cashFlowContainer .swiper {
+  height: 97%;
+  width: 100%;
+}
+
+.cashFlowContainer .swiper .slideContent {
+  width: 100%;
+  height: 100%;
+}
+
+.cashFlowContainer .swiper .swiper-slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: #111827;
+}
+
+.cashFlowContainer .swiper .swiper-slide hr {
+  width: 0;
+  height: 90%;
+  margin: 0 1rem;
+}
+
+.cashFlowContainer .swiper .swiper-slide .left {
+  width: 40%;
+  height: 80%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.cashFlowContainer .swiper .swiper-slide .left h3 {
+  width: 100%;
+  height: 7%;
+  border-bottom: 1px solid #42A5F5;
+  display: flex;
+  align-items: center;
+}
+
+.cashFlowContainer .swiper .swiper-slide .left h3 .dataName {
+  float: left;
+  width: 60%;
+  text-align: start;
+}
+
+.cashFlowContainer .swiper .swiper-slide .left h3 .dataValue {
+  width: 40%;
+  float: right;
+  text-align: end;
+}
+
+.cashFlowContainer .swiper .swiper-slide .right {
+  width: 40%;
+  height: 80%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.cashFlowContainer .swiper .swiper-slide .right h3 {
+  width: 100%;
+  height: 7%;
+  border-bottom: 1px solid #42A5F5;
+  display: flex;
+  align-items: center;
+}
+
+.cashFlowContainer .swiper .swiper-slide .right h3 .dataName {
+  float: left;
+  width: 60%;
+  text-align: start;
+}
+
+.cashFlowContainer .swiper .swiper-slide .right h3 .dataValue {
+  width: 40%;
+  float: right;
+  text-align: end;
+}
+
+.earningsContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.earningsContainer .titleContainer {
+  height: 3%;
+  background-color: #42A5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.earningsContainer .titleContainer h2 {
+  color: #000;
+}
+
+.earningsContainer .swiper {
+  height: 97%;
+  width: 100%;
+}
+
+.earningsContainer .swiper .slideContent {
+  width: 100%;
+  height: 100%;
+}
+
+.earningsContainer .swiper .swiper-slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: #111827;
+}
+
+.earningsContainer .swiper .swiper-slide hr {
+  width: 0;
+  height: 90%;
+  margin: 0 1rem;
+}
+
+.earningsContainer .swiper .swiper-slide .content {
+  width: 80%;
+  height: 60%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.earningsContainer .swiper .swiper-slide .content h3 {
+  width: 100%;
+  height: 10%;
+  border-bottom: 1px solid #42A5F5;
+  display: flex;
+  align-items: center;
+}
+
+.earningsContainer .swiper .swiper-slide .content h3 .dataName {
+  float: left;
+  width: 60%;
+  text-align: start;
+}
+
+.earningsContainer .swiper .swiper-slide .content h3 .dataValue {
+  width: 40%;
+  float: right;
+  text-align: end;
+}
+
+.overviewHeader .searchInput {
+  width: 35%;
+  justify-content: space-between;
+}
+
+.overviewHeader .searchInput .form__group {
   position: relative;
   padding: 15px 0 0;
   margin-right: 5px;
-  width: 60%;
+  width: 82%;
   height: 100%;
 }
 
-.searchInput .form__field {
-  font-family: inherit;
+.overviewContainer {
   width: 100%;
   height: 100%;
-  border: 0;
-  border-bottom: 2px solid #9b9b9b;
-  outline: 0;
-  font-size: 1.3rem;
-  font-weight: 300;
-  color: #fff;
-  padding: 7px 0 0px;
-  background: transparent;
-  transition: border-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.searchInput .form__field::placeholder {
-  color: transparent;
+.overviewContainer .titleContainer {
+  height: 3%;
+  background-color: #42A5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.searchInput .form__field:placeholder-shown ~ .form__label {
-  font-size: 1.3rem;
-  cursor: text;
-  top: 17px;
+.overviewContainer .titleContainer h2 {
+  color: #000;
 }
 
-.searchInput .form__label {
-  position: absolute;
-  top: 0;
-  display: block;
-  transition: 0.2s;
-  font-size: 1rem;
-  color: #9b9b9b;
+.overviewContainer .swiper {
+  height: 97%;
+  width: 100%;
 }
 
-.searchInput .form__field:focus {
-  padding-bottom: 0;
-  font-weight: 300;
-  border-width: 3px;
-  border-image: linear-gradient(to right, #42A5F5, #42A5F5);
-  border-image-slice: 1;
+.overviewContainer .swiper .slideContent {
+  width: 100%;
+  height: 100%;
 }
 
-.searchInput .form__field:focus ~ .form__label {
-  position: absolute;
-  top: 0;
-  display: block;
-  transition: 0.2s;
-  font-size: 1rem;
-  color: #42A5F5;
-  font-weight: 700;
+.overviewContainer .swiper .swiper-slide {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  background-color: #111827;
 }
 
-.searchInput .form__field:required, .searchInput .form__field:invalid {
-  box-shadow: none;
+.overviewContainer .swiper .swiper-slide hr {
+  width: 0;
+  height: 90%;
+  margin: 0 1rem;
 }
 
-.searchInput button {
-  width: 15%;
-  height: 100% !important;
+.overviewContainer .swiper .swiper-slide .left {
+  width: 40%;
+  height: 90%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.overviewContainer .swiper .swiper-slide .left h3 {
+  width: 100%;
+  height: 7%;
+  border-bottom: 1px solid #42A5F5;
+  display: flex;
+  align-items: center;
+}
+
+.overviewContainer .swiper .swiper-slide .left h3 .dataName {
+  float: left;
+  width: 40%;
+  text-align: start;
+}
+
+.overviewContainer .swiper .swiper-slide .left h3 .dataValue {
+  height: 100%;
+  width: 60%;
+  float: right;
+  text-align: end;
+  overflow-y: auto;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.overviewContainer .swiper .swiper-slide .left h3 .dataValue span {
+  margin: 0 auto;
+}
+
+.overviewContainer .swiper .swiper-slide .right {
+  width: 40%;
+  height: 90%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.overviewContainer .swiper .swiper-slide .right h3 {
+  width: 100%;
+  height: 7%;
+  border-bottom: 1px solid #42A5F5;
+  display: flex;
+  align-items: center;
+}
+
+.overviewContainer .swiper .swiper-slide .right h3 .dataName {
+  float: left;
+  width: 40%;
+  text-align: start;
+}
+
+.overviewContainer .swiper .swiper-slide .right h3 .dataValue {
+  height: 100%;
+  width: 60%;
+  float: right;
+  text-align: end;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 /*# sourceMappingURL=main.css.map */

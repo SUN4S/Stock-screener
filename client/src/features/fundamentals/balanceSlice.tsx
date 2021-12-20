@@ -1,7 +1,7 @@
-import { RootState } from "../app/store";
+import { RootState } from "../../app/store";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchFundamentalsBalance } from "./fetchFundamentals";
-import { BalanceFetchState } from "../models/fundamentalData";
+import { BalanceFetchState } from "../../models/fundamentalData";
 
 const initialState = {
   data: {

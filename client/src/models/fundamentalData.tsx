@@ -76,11 +76,11 @@ export interface IncomeFetchState {
 
 export interface BalanceState {
   "symbol": string;
-  "annualReports": BalanceStateAnual[];
+  "annualReports": BalanceStateAnnual[];
   "quarterlyReports": BalanceStateQuarterly[];
 }
 
-export interface BalanceStateAnual{
+export interface BalanceStateAnnual{
   "fiscalDateEnding": string,
     "reportedCurrency": string,
     "totalAssets": string,
@@ -170,4 +170,174 @@ export interface BalanceFetchState {
   status: "loading" | "idle";
   error: string | null;
   data: BalanceState;
+};
+
+
+export interface CashFlowState {
+  "symbol": string;
+  "annualReports": CashFlowStateAnnual[];
+  "quarterlyReports": CashFlowStateQuarterly[];
+}
+
+export interface CashFlowStateAnnual {
+  "fiscalDateEnding": string,
+  "reportedCurrency": string,
+  "operatingCashflow": string,
+  "paymentsForOperatingActivities": string,
+  "proceedsFromOperatingActivities": string,
+  "changeInOperatingLiabilities": string,
+  "changeInOperatingAssets": string,
+  "depreciationDepletionAndAmortization": string,
+  "capitalExpenditures": string,
+  "changeInReceivables": string,
+  "changeInInventory": string,
+  "profitLoss": string,
+  "cashflowFromInvestment": string,
+  "cashflowFromFinancing": string,
+  "proceedsFromRepaymentsOfShortTermDebt": string,
+  "paymentsForRepurchaseOfCommonStock": string,
+  "paymentsForRepurchaseOfEquity": string,
+  "paymentsForRepurchaseOfPreferredStock": string,
+  "dividendPayout": string,
+  "dividendPayoutCommonStock": string,
+  "dividendPayoutPreferredStock": string,
+  "proceedsFromIssuanceOfCommonStock": string,
+  "proceedsFromIssuanceOfLongTermDebtAndCapitalSecuritiesNet": string,
+  "proceedsFromIssuanceOfPreferredStock": string,
+  "proceedsFromRepurchaseOfEquity": string,
+  "proceedsFromSaleOfTreasuryStock": string,
+  "changeInCashAndCashEquivalents": string,
+  "changeInExchangeRate": string,
+  "netIncome": string
+}
+
+export interface CashFlowStateQuarterly {
+  "fiscalDateEnding": string,
+  "reportedCurrency": string,
+  "operatingCashflow": string,
+  "paymentsForOperatingActivities": string,
+  "proceedsFromOperatingActivities": string,
+  "changeInOperatingLiabilities": string,
+  "changeInOperatingAssets": string,
+  "depreciationDepletionAndAmortization": string,
+  "capitalExpenditures": string,
+  "changeInReceivables": string,
+  "changeInInventory": string,
+  "profitLoss": string,
+  "cashflowFromInvestment": string,
+  "cashflowFromFinancing": string,
+  "proceedsFromRepaymentsOfShortTermDebt": string,
+  "paymentsForRepurchaseOfCommonStock": string,
+  "paymentsForRepurchaseOfEquity": string,
+  "paymentsForRepurchaseOfPreferredStock": string,
+  "dividendPayout": string,
+  "dividendPayoutCommonStock": string,
+  "dividendPayoutPreferredStock": string,
+  "proceedsFromIssuanceOfCommonStock": string,
+  "proceedsFromIssuanceOfLongTermDebtAndCapitalSecuritiesNet": string,
+  "proceedsFromIssuanceOfPreferredStock": string,
+  "proceedsFromRepurchaseOfEquity": string,
+  "proceedsFromSaleOfTreasuryStock": string,
+  "changeInCashAndCashEquivalents": string,
+  "changeInExchangeRate": string,
+  "netIncome": string
+}
+
+export interface FetchCashFlowError {
+  message: string;
+}
+
+export interface CashFlowFetchState {
+  status: "loading" | "idle";
+  error: string | null;
+  data: CashFlowState;
+};
+
+export interface EarningsState {
+  "symbol": string;
+  "annualEarnings": EarningsStateAnnual[];
+  "quarterlyEarnings": EarningsStateQuarterly[];
+}
+
+export interface EarningsStateAnnual {
+    "fiscalDateEnding": string,
+    "reportedEPS": string
+}
+
+export interface EarningsStateQuarterly {
+  "fiscalDateEnding": string,
+  "reportedDate": string,
+  "reportedEPS": string,
+  "estimatedEPS": string,
+  "surprise": string,
+  "surprisePercentage": string
+}
+
+export interface FetchEarningsError {
+  message: string;
+}
+
+export interface EarningsFetchState {
+  data: EarningsState;
+  status: "loading" | "idle";
+  error: string | null;
+};
+
+export interface OverviewState {
+  "Symbol": string,
+  "AssetType": string,
+  "Name": string,
+  "Description": string,
+  "CIK": string,
+  "Exchange": string,
+  "Currency": string,
+  "Country":string ,
+  "Sector": string,
+  "Industry": string,
+  "Address": string,
+  "FiscalYearEnd": string,
+  "LatestQuarter": string,
+  "MarketCapitalization": string,
+  "EBITDA": string,
+  "PERatio": string,
+  "PEGRatio": string,
+  "BookValue": string,
+  "DividendPerShare": string,
+  "DividendYield": string,
+  "EPS": string,
+  "RevenuePerShareTTM": string,
+  "ProfitMargin": string,
+  "OperatingMarginTTM": string,
+  "ReturnOnAssetsTTM": string,
+  "ReturnOnEquityTTM": string,
+  "RevenueTTM": string,
+  "GrossProfitTTM": string,
+  "DilutedEPSTTM": string,
+  "QuarterlyEarningsGrowthYOY": string,
+  "QuarterlyRevenueGrowthYOY": string,
+  "AnalystTargetPrice": string,
+  "TrailingPE": string,
+  "ForwardPE": string,
+  "PriceToSalesRatioTTM": string,
+  "PriceToBookRatio": string,
+  "EVToRevenue": string,
+  "EVToEBITDA": string,
+  "Beta": string,
+  "52WeekHigh": string,
+  "52WeekLow": string,
+  "50DayMovingAverage": string,
+  "200DayMovingAverage": string,
+  "SharesOutstanding": string,
+  "DividendDate": string,
+  "ExDividendDate": string
+}
+
+export interface FetchOverviewError {
+  message: string;
+}
+
+export interface OverviewFetchState {
+  data: OverviewState;
+  status: "loading" | "idle";
+  error: string | null;
 };

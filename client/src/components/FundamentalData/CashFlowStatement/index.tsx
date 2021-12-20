@@ -6,12 +6,13 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
-
+import { useTypedSelector } from "../../../app/store";
+import { selectStatus } from '../../../features/fundamentals/cashFlowSlice';
 import { RootState } from '../../../app/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchFundamentalsBalance } from '../../../features/fetchFundamentals';
-import { BalanceQuarterlyList } from './BalanceQuarterlyList';
-import { BalanceAnnualList } from './BalanceAnnualLIst';
+import { fetchFundamentalsCashFlow } from '../../../features/fundamentals/fetchFundamentals';
+import { CashFlowQuarterlyList } from './CashFlowQuarterlyList';
+import { CashFlowAnnualList } from './CashFlowAnnualList';
 
 const Header = styled(Paper)(({theme}) => ({
   height: '10vh',
@@ -47,10 +48,12 @@ const Container = styled(Paper)(({ theme }) => ({
   overflowY: 'auto'
 }));
 
-export const BalanceStatement = () => {
+export const CashFlowStatement = () => {
   const [input, setInput] = useState<string>();
   const [select, setSelect] = useState<string>("annualReports");
-  const balanceData = useSelector((state: RootState) => state.balance.data);
+
+  const status = useTypedSelector(selectStatus);
+  const cashFlowData = useSelector((state: RootState) => state.cashFlow.data);
 
   const dispatch = useDispatch();
 
@@ -59,7 +62,7 @@ export const BalanceStatement = () => {
   };
 
   const handleClick = (input: string | any) => {
-    dispatch(fetchFundamentalsBalance(input));
+    dispatch(fetchFundamentalsCashFlow(input));
   }
 
   return (
@@ -67,8 +70,8 @@ export const BalanceStatement = () => {
       <div>
         <Header>
           <div className='headerText'>
-            <h1>Balance Sheet Data</h1>
-            <p>Search for a Companys' Balance sheet data</p>
+            <h1>Cashflow Sheet Data</h1>
+            <p>Search for a Companys' Cashflow sheet data</p>
           </div>
           <div className='searchInput'>
           <FormControl sx={{ m:1, minWidth: 120}}>          
@@ -97,6 +100,7 @@ export const BalanceStatement = () => {
               loadingPosition="center"
               variant="outlined"
               onClick={() => handleClick(input)}
+              loading={status === 'loading' ? true : false}
             >
               <SearchOutlinedIcon />
             </LoadingButton>
@@ -104,13 +108,13 @@ export const BalanceStatement = () => {
         </Header>
         <hr style={{ margin: '1rem auto 0', width: '98%' }} />
       </div>
-      <div className="balanceContainer">
+      <div className="cashFlowContainer">
         <Container>
           <div className="titleContainer">
-            <h2>Company Symbol: {balanceData.symbol}</h2>
+            <h2>Company Symbol: {cashFlowData.symbol}</h2>
           </div>
           {
-            select === "annualReports" ? <BalanceAnnualList /> : <BalanceQuarterlyList />
+            select === "annualReports" ? <CashFlowAnnualList /> : <CashFlowQuarterlyList />
           }
             
         </Container>

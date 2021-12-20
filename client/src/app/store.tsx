@@ -2,15 +2,21 @@ import activeReducer from '../features/activeSlice';
 import { configureStore } from '@reduxjs/toolkit';
 import searchReducer from '../features/searchSlice';
 import { TypedUseSelectorHook, useSelector } from "react-redux";
-import incomeReducer from '../features/incomeSlice';
-import balanceReducer from '../features/balanceSlice';
+import incomeReducer from '../features/fundamentals/incomeSlice';
+import balanceReducer from '../features/fundamentals/balanceSlice';
+import cashFlowReducer from '../features/fundamentals/cashFlowSlice';
+import earningsReducer from '../features/fundamentals/earningsSlice';
+import overviewReducer from '../features/fundamentals/overviewSlice';
 
 export const store = configureStore({
   reducer: {
     active: activeReducer,
     search: searchReducer,
     income: incomeReducer,
-    balance: balanceReducer
+    balance: balanceReducer,
+    cashFlow: cashFlowReducer,
+    earnings: earningsReducer,
+    overview: overviewReducer
   },
 })
 

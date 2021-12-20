@@ -3,15 +3,11 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import LoadingButton from '@mui/lab/LoadingButton';
-import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import FormControl from '@mui/material/FormControl';
-import { selectStatus } from '../../../features/fundamentals/incomeSlice';
-import { useTypedSelector, RootState } from "../../../app/store";
+import { selectStatus } from '../../../features/fundamentals/overviewSlice';
+import { useTypedSelector, RootState } from '../../../app/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchFundamentalsIncome } from '../../../features/fundamentals/fetchFundamentals';
-import { IncomeAnnualList } from './IncomeAnnualList';
-import { IncomeQuarterlyList } from './IncomeQuarterlyList';
+import { fetchFundamentalsOverview } from '../../../features/fundamentals/fetchFundamentals';
+import { OverviewList } from './OverviewList';
 
 const Header = styled(Paper)(({theme}) => ({
   height: '10vh',
@@ -47,42 +43,27 @@ const Container = styled(Paper)(({ theme }) => ({
   overflowY: 'auto'
 }));
 
-export const IncomeStatement = () => {
+export const OverviewStatement = () => {
   const [input, setInput] = useState<string>();
-  const [select, setSelect] = useState<string>("annualReports");
 
   const status = useTypedSelector(selectStatus);
-  const incomeData = useSelector((state: RootState) => state.income.data);
+  const overviewData = useSelector((state: RootState) => state.overview.data);
 
   const dispatch = useDispatch();
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setSelect(event.target.value);
-  };
-
   const handleClick = (input: string | any) => {
-    dispatch(fetchFundamentalsIncome(input));
+    dispatch(fetchFundamentalsOverview(input));
   }
 
   return (
     <>
-      <div>
+      <div className="overviewHeader">
         <Header>
           <div className='headerText'>
-            <h1>Income Statement Data</h1>
-            <p>Seach for a Comapnys' Income Statement Data</p>
+            <h1>Overview Sheet Data</h1>
+            <p>Search for a Companys' Overview sheet data</p>
           </div>
           <div className='searchInput'>
-          <FormControl sx={{ m:1, minWidth: 120}}>          
-            <Select
-              value={select}
-              sx={{ color: "primary.main" }}
-              onChange={handleChange}
-            >
-              <MenuItem value={"annualReports"} >Annual</MenuItem>
-              <MenuItem value={"quarterlyReports"} >Quarterly</MenuItem>
-            </Select>
-          </FormControl>
             <div className="form__group field">
               <input
                 type="input"
@@ -107,15 +88,12 @@ export const IncomeStatement = () => {
         </Header>
         <hr style={{ margin: '1rem auto 0', width: '98%' }} />
       </div>
-      <div className="incomeContainer">
+      <div className="overviewContainer">
         <Container>
           <div className="titleContainer">
-            <h2>Company Symbol: {incomeData.symbol}</h2>
+            <h2>Company Symbol: {overviewData.Symbol}</h2>
           </div>
-          {
-            select === "annualReports" ? <IncomeAnnualList /> : <IncomeQuarterlyList />
-          }
-            
+          <OverviewList />        
         </Container>
       </div>   
     </>

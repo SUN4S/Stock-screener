@@ -25,7 +25,7 @@
 
     .form__group {
       position: relative;
-      padding: 15px 0 0;
+      padding: 7px 0 0;
       margin-right: 5px;
       width: 60%;
       height: 100%;
@@ -38,10 +38,10 @@
       border: 0;
       border-bottom: 2px solid $gray;
       outline: 0;
-      font-size: 1.3rem;
+      font-size: 1.6rem;
       font-weight: 300;
       color: $white;
-      padding: 7px 0 0px;
+      padding: 17px 0 0px;
       background: transparent;
       transition: border-color 0.2s;
 
@@ -52,7 +52,7 @@
       &:placeholder-shown ~ .form__label {
         font-size: 1.3rem;
         cursor: text;
-        top: 17px;
+        top: 18px;
       }
     }
 

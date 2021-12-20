@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {Swiper, SwiperSlide} from 'swiper/react/swiper-react';
 import { Navigation, Pagination, A11y } from 'swiper';
-import { BalanceStateAnual } from '../../../models/fundamentalData';
+import { BalanceStateAnnual } from '../../../models/fundamentalData';
 
 import { RootState } from '../../../app/store';
 import { useSelector } from 'react-redux';
@@ -11,7 +11,6 @@ export const BalanceAnnualList = () => {
   const balanceError = useSelector((state: RootState) => state.balance.error);
   const [currency, setCurrency] = useState<string | undefined>('USD');
 
-  console.log(balanceData)
   useEffect(() => {
     setCurrency(balanceData.annualReports[0].reportedCurrency);
   }, [balanceData])
@@ -35,7 +34,7 @@ export const BalanceAnnualList = () => {
         ? <SwiperSlide>
             <h1>{balanceError}</h1>
           </SwiperSlide>
-        : balanceData.annualReports.map((item: BalanceStateAnual) => {
+        : balanceData.annualReports.map((item: BalanceStateAnnual) => {
           return(
             <SwiperSlide>
               <div className="left">

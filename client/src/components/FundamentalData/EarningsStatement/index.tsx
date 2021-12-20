@@ -6,12 +6,12 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
-import { selectStatus } from '../../../features/fundamentals/incomeSlice';
-import { useTypedSelector, RootState } from "../../../app/store";
+import { selectStatus } from '../../../features/fundamentals/earningsSlice';
+import { useTypedSelector, RootState } from '../../../app/store';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchFundamentalsIncome } from '../../../features/fundamentals/fetchFundamentals';
-import { IncomeAnnualList } from './IncomeAnnualList';
-import { IncomeQuarterlyList } from './IncomeQuarterlyList';
+import { fetchFundamentalsEarnings } from '../../../features/fundamentals/fetchFundamentals';
+import { EarningsQuarterlyList } from './EarningsQuarterlyList';
+import { EarningsAnnualList } from './EarningsAnnualList';
 
 const Header = styled(Paper)(({theme}) => ({
   height: '10vh',
@@ -47,13 +47,12 @@ const Container = styled(Paper)(({ theme }) => ({
   overflowY: 'auto'
 }));
 
-export const IncomeStatement = () => {
+export const EarningsStatement = () => {
   const [input, setInput] = useState<string>();
   const [select, setSelect] = useState<string>("annualReports");
+  const earningsData = useSelector((state: RootState) => state.earnings.data);
 
   const status = useTypedSelector(selectStatus);
-  const incomeData = useSelector((state: RootState) => state.income.data);
-
   const dispatch = useDispatch();
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -61,7 +60,7 @@ export const IncomeStatement = () => {
   };
 
   const handleClick = (input: string | any) => {
-    dispatch(fetchFundamentalsIncome(input));
+    dispatch(fetchFundamentalsEarnings(input));
   }
 
   return (
@@ -69,8 +68,8 @@ export const IncomeStatement = () => {
       <div>
         <Header>
           <div className='headerText'>
-            <h1>Income Statement Data</h1>
-            <p>Seach for a Comapnys' Income Statement Data</p>
+            <h1>earnings Sheet Data</h1>
+            <p>Search for a Companys' earnings sheet data</p>
           </div>
           <div className='searchInput'>
           <FormControl sx={{ m:1, minWidth: 120}}>          
@@ -107,13 +106,13 @@ export const IncomeStatement = () => {
         </Header>
         <hr style={{ margin: '1rem auto 0', width: '98%' }} />
       </div>
-      <div className="incomeContainer">
+      <div className="earningsContainer">
         <Container>
           <div className="titleContainer">
-            <h2>Company Symbol: {incomeData.symbol}</h2>
+            <h2>Company Symbol: {earningsData.symbol}</h2>
           </div>
           {
-            select === "annualReports" ? <IncomeAnnualList /> : <IncomeQuarterlyList />
+            select === "annualReports" ? <EarningsAnnualList /> : <EarningsQuarterlyList />
           }
             
         </Container>
@@ -121,4 +120,3 @@ export const IncomeStatement = () => {
     </>
   )
 }
-

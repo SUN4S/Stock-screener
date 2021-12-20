@@ -5,7 +5,7 @@ export interface ActiveState {
 }
 
 const initialState: ActiveState = {
-  value: 9,
+  value: 6,
 }
 
 export const activeSlice = createSlice({
