@@ -1,25 +1,26 @@
 const axios = require('axios');
-const csv=require('csvtojson');
+const csv = require('csv-express');
+const csvtojson = require('csvtojson');
 require('dotenv').config();
 
 const getInterday = async (req,res) => {
-  const { ticker, interval } = req.params;
+  const { ticker } = req.params;
   try {
     const response = await axios.get(`https://www.alphavantage.co/query?`, {
       params: {
         function: 'TIME_SERIES_INTRADAY',
         symbol: ticker,
-        interval: interval, // 1min, 5min, 15min, 30min, 60min
+        interval: '5min', // 1min, 5min, 15min, 30min, 60min
         outputsize: 'full', // compact(100 data points), full (full length interday 1-2months)
+        datatype: 'csv',
         apikey: process.env.ALPHA_VANTAGE_API
       },
       headers: {
         'User-Agent': 'request'
       }
-    });
+    });   
     res.status(201).json(response.data);
   } catch (error) {
-    console.log(error);
     res.status(500).json({msg: error});
   } 
 }
@@ -39,7 +40,7 @@ const getInterdayExtended = async (req,res) => {
         'User-Agent': 'request'
       }
     });
-    csv()
+    csvtojson()
       .fromString(response.data)
       .then((data) => {
         res.status(201).json({data: data});
@@ -55,7 +56,7 @@ const getDailyAdjusted = async (req,res) => {
   try {
     const response = await axios.get(`https://www.alphavantage.co/query?`, {
       params: {
-        function: 'TIME_SERIES_DAILY_ADJUSTED',
+        function: 'TIME_SERIES_DAILY',
         symbol: ticker,
         outputsize: 'full', // compact(100 data points), full (full length interday 1-2months) 
         apikey: process.env.ALPHA_VANTAGE_API

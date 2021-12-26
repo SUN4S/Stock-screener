@@ -7,6 +7,10 @@ import balanceReducer from '../features/fundamentals/balanceSlice';
 import cashFlowReducer from '../features/fundamentals/cashFlowSlice';
 import earningsReducer from '../features/fundamentals/earningsSlice';
 import overviewReducer from '../features/fundamentals/overviewSlice';
+import interdayReducer from '../features/charts/interdaySlice';
+import dailyReducer from '../features/charts/dailySlice';
+import weeklyReducer from '../features/charts/weeklySlice';
+import monthlyReducer from '../features/charts/monthlySlice'
 
 export const store = configureStore({
   reducer: {
@@ -16,7 +20,11 @@ export const store = configureStore({
     balance: balanceReducer,
     cashFlow: cashFlowReducer,
     earnings: earningsReducer,
-    overview: overviewReducer
+    overview: overviewReducer,
+    interday: interdayReducer,
+    daily: dailyReducer,
+    weekly: weeklyReducer,
+    monthly: monthlyReducer
   },
 })
 

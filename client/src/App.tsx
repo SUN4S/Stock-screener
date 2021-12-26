@@ -12,7 +12,7 @@ import CompanySearch from "./components/CompanySearch";
 import { Grid } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import SideBar from './components/SideBar';
-import TimeSeries from './components/TimeSeries';
+import { TimeSeries } from './components/TimeSeries';
 import { styled } from '@mui/material/styles';
 import { IncomeStatement } from './components/FundamentalData/IncomeStatement';
 import { Footer } from './components/Footer';
@@ -44,7 +44,7 @@ export const App = () => {
         <Main>
           <Routes>
             <Route path="/" element={<CompanySearch />} />
-            <Route path="/timeseries" element={<TimeSeries />} />
+            <Route path="/timeseries/*" element={<TimeSeries />} />
             <Route path="/fundamentaldata/incomestatement" element={<IncomeStatement />} />
             <Route path="/fundamentaldata/balanceSheet" element={<BalanceStatement />} />
             <Route path="/fundamentaldata/cashflow" element={<CashFlowStatement />} />
