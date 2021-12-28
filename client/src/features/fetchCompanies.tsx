@@ -1,6 +1,7 @@
+import { FetchCompaniesError, SearchState } from '../models/searchData';
+
 import axios from 'axios';
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { SearchState, FetchCompaniesError } from '../models/searchData';
 
 export const fetchCompanies = createAsyncThunk<
   SearchState,

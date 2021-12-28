@@ -1,71 +1,116 @@
-import React, {useState, useEffect} from 'react'
-import { useSelector } from 'react-redux';
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LineElement,
+  LinearScale,
+  PointElement,
+  Title,
+  Tooltip,
+} from 'chart.js';
+import React, {useEffect, useState} from 'react'
+
+import { Grid } from '@mui/material';
+import { Line } from 'react-chartjs-2'
 import { RootState } from '../../app/store';
-import { selectStatus } from '../../features/charts/interdaySlice';
-import { useTypedSelector } from "../../app/store";
-import * as d3 from "d3";
+import { useSelector } from 'react-redux';
 
 export const InterdayData = () => {
   const interdayData = useSelector((state: RootState) => state.interday.data);
-  const interdayError = useSelector((state: RootState) => state.interday.error);
+  //const interdayError = useSelector((state: RootState) => state.interday.error);
+  const [labels, setLabels] = useState<string[]>([]);
+  const [interdayClose, setinterdayClose] = useState<number[]>([]);
+  const [recentData, setRecentData] = useState<any>();
 
-  console.log(interdayData);
+  useEffect(() => {
+    setLabels([]);
+    setinterdayClose([]);
+    for(const [key, value] of Object.entries(interdayData['Time Series (5min)'])) {
+      setLabels(labels => [key, ...labels]);
+      setinterdayClose(interdayClose => [+value['4. close'], ...interdayClose]);
+    }
+    for(const [key, value] of Object.entries(interdayData['Time Series (5min)'])) {
+      setRecentData (
+        <>
+          <h1>Most Recent:</h1>
+          <h3>Open: {value['1. open']}</h3>
+          <h3>High: {value['2. high']}</h3>
+          <h3>Low: {value['3. low']}</h3>
+          <h3>Close: {value['4. close']}</h3>
+          <h3>Volume: {value['5. volume']}</h3>
+        </>
+      )
+    }
+  }, [interdayData])
 
-  const margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+  );
 
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      title: {
+        display: true,
+        text: 'Interday Data',
+        color: '#fff',
+      },
+    },
+    scales: {
+      xAxis: {
+        ticks: {
+          fontColor: '#fff',
+          maxTicksLimit: 30
+        },
+        grid: {
+          borderColor: '#9b9b9b'
+        }
+      },
+      yAxis: {
+        grid: {
+          borderColor: '#9b9b9b'
+        }
+      }
+    }
+  };
 
-    const svg = d3.select("#my_chart")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom);
-
-    let xScale = d3.scaleTime()
-      .range([0, width]);
-    let xAxis = d3.axisBottom(xScale);
-    let xAxisGroup = svg.append('g')
-      .classed('x', true)
-      .classed('axis', true)
-      .attr('transform', `translate(${0},${height})`)
-      .call(xAxis);
-
-      let yScale = d3.scaleLinear()
-        .range([height, 0]);
-      let yAxis = d3.axisLeft(yScale);
-      let yAxisGroup = svg.append('g')
-        .classed('y', true)
-        .classed('axis', true)
-        .call(yAxis);
-
-      let pointsGroup = svg.append('g')
-      .classed('points', true);
-
-
-  // console.log(interdayError);
-  // if(interdayError === null) {
-  //   for( const [key, object] of Object.entries(interdayData["Time Series (5min)"])) {
-  //     console.log(`${key}, ${object["1. open"]}`);
-  //     console.log(`${key}, ${object["2. high"]}`);
-  //     console.log(`${key}, ${object["5. volume"]}`);
-  //     break;
-  //   }
-  // }
-
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: "Closed at",
+        data: interdayClose,
+        borderColor: '#42A5F5',
+        borderWidth: 1,
+        backgroundColor: 'transparent',
+        pointRadius: 1,
+      },
+    ],
+  };
 
   return (
     <>
-      { interdayError === null && 
-        <>
-          <div className="mostRecent">
-            <h1>Most Recent: </h1>
-            {interdayData}
-          </div>
-          <div className="drawChart" id="my_chart">
-
-          </div>
-        </>
-      }
+      <Grid container className="chartContainer" >
+        <Grid item xs={12} className="titleContainer" alignSelf='flex-start'>
+          <h2>Company Symbol: {interdayData['Meta Data']['2. Symbol'].toUpperCase()}</h2>
+        </Grid>
+        <Grid item xs={12} lg={3} className="mostRecent">
+          {recentData}
+        </Grid>
+        <Grid item xs={12} lg={9} className="drawChart">
+          <Line options={options} data={data} />
+        </Grid>
+      </Grid>   
     </>
   )
 }

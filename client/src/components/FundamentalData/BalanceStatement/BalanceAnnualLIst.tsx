@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import { A11y, Navigation, Pagination } from 'swiper';
+import React, { useEffect, useState } from 'react'
 import {Swiper, SwiperSlide} from 'swiper/react/swiper-react';
-import { Navigation, Pagination, A11y } from 'swiper';
-import { BalanceStateAnnual } from '../../../models/fundamentalData';
 
+import { BalanceStateAnnual } from '../../../models/fundamentalData';
 import { RootState } from '../../../app/store';
 import { useSelector } from 'react-redux';
 

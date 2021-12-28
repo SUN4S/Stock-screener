@@ -1,17 +1,18 @@
+import {
+  BalanceState,
+  CashFlowState,
+  EarningsState,
+  FetchBalanceError,
+  FetchCashFlowError,
+  FetchEarningsError,
+  FetchIncomeError,
+  FetchOverviewError,
+  IncomeState,
+  OverviewState
+} from '../../models/fundamentalData';
+
 import axios from 'axios';
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { 
-  IncomeState,
-  FetchIncomeError, 
-  BalanceState, 
-  FetchBalanceError, 
-  FetchCashFlowError, 
-  CashFlowState,
-  FetchEarningsError,
-  EarningsState,
-  OverviewState,
-  FetchOverviewError
-} from '../../models/fundamentalData';
 
 export const fetchFundamentalsIncome = createAsyncThunk<
   IncomeState,
@@ -131,7 +132,7 @@ export const fetchFundamentalsOverview = createAsyncThunk<
     const response = await axios(`/api/v1/fundamentals/companyoverview/${input}`);
     // Get the JSON from the response:
     const data: OverviewState = await response.data;
-    
+
     // Check if status is not okay:
     if (!data["Symbol"]) {
       // Return the error message:

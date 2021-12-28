@@ -12,7 +12,6 @@ const getInterday = async (req,res) => {
         symbol: ticker,
         interval: '5min', // 1min, 5min, 15min, 30min, 60min
         outputsize: 'full', // compact(100 data points), full (full length interday 1-2months)
-        datatype: 'csv',
         apikey: process.env.ALPHA_VANTAGE_API
       },
       headers: {
@@ -58,7 +57,7 @@ const getDailyAdjusted = async (req,res) => {
       params: {
         function: 'TIME_SERIES_DAILY',
         symbol: ticker,
-        outputsize: 'full', // compact(100 data points), full (full length interday 1-2months) 
+        outputsize: 'compact', // compact(100 data points), full (full length interday 1-2months) 
         apikey: process.env.ALPHA_VANTAGE_API
       },
       headers: {

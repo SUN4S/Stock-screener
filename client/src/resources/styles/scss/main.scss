@@ -1,3 +1,14 @@
+@import './variables';
+@import './components/swiper';
+@import './components/search';
+@import './sidebar';
+@import './layout/search';
+@import './layout/income';
+@import './layout/balance';
+@import './layout/cashFlow';
+@import './layout/earnings';
+@import './layout/overview';
+@import './layout/chart';
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
@@ -26,11 +37,8 @@
   border-radius: 100px;
 }
 
-@import './sidebar';
-@import './search';
-@import './income';
-@import './balance';
-@import './cashFlow';
-@import './earnings';
-@import './overview';
-@import './chart';
+
+.headerText {
+  width: 100%;
+  text-align: left;
+}

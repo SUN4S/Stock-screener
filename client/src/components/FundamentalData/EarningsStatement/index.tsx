@@ -1,49 +1,32 @@
 import React, { useState } from 'react'
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
+import { RootState, useTypedSelector } from '../../../app/store';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { EarningsAnnualList } from './EarningsAnnualList';
+import { EarningsQuarterlyList } from './EarningsQuarterlyList';
+import FormControl from '@mui/material/FormControl';
+import { Grid } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import FormControl from '@mui/material/FormControl';
-import { selectStatus } from '../../../features/fundamentals/earningsSlice';
-import { useTypedSelector, RootState } from '../../../app/store';
-import { useSelector, useDispatch } from 'react-redux';
+import Paper from '@mui/material/Paper';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { fetchFundamentalsEarnings } from '../../../features/fundamentals/fetchFundamentals';
-import { EarningsQuarterlyList } from './EarningsQuarterlyList';
-import { EarningsAnnualList } from './EarningsAnnualList';
-
-const Header = styled(Paper)(({theme}) => ({
-  height: '10vh',
-  backgroundColor: 'transparent',
-  border: 'none',
-  boxShadow: 'none',
-  color: '#fff',
-  display: 'flex',
-  alignItems: 'end',
-  justifyContent: 'space-between',
-  flexWrap: 'wrap',
-  padding: '0 3rem',
-  "p": {
-    width: "50%",
-    textAlign: 'start',
-    marginTop: '0.5rem'
-  }
-}));
+import { selectStatus } from '../../../features/fundamentals/earningsSlice';
+import { styled } from '@mui/material/styles';
 
 const Container = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(0),
   textAlign: 'center',
-  height: '78vh',
-  width: "80vw",
   borderRadius: '5px',
   color: theme.palette.text.secondary,
   backgroundColor: '#111827',
+  height: '100%',
+  width: '100%',
   display: 'flex',
   justifyContent: 'center',
   flexDirection: 'column',
-  margin: '0 1rem',
   overflowY: 'auto'
 }));
 
@@ -65,48 +48,58 @@ export const EarningsStatement = () => {
 
   return (
     <>
-      <div>
-        <Header>
-          <div className='headerText'>
-            <h1>earnings Sheet Data</h1>
-            <p>Search for a Companys' earnings sheet data</p>
-          </div>
-          <div className='searchInput'>
-          <FormControl sx={{ m:1, minWidth: 120}}>          
-            <Select
-              value={select}
-              sx={{ color: "primary.main" }}
-              onChange={handleChange}
-            >
-              <MenuItem value={"annualReports"} >Annual</MenuItem>
-              <MenuItem value={"quarterlyReports"} >Quarterly</MenuItem>
-            </Select>
-          </FormControl>
-            <div className="form__group field">
-              <input
-                type="input"
-                className="form__field" 
-                placeholder="Hello there"
-                name="search" id='name' 
-                required 
-                autoComplete={'false'}
-                onChange={(e) => setInput(e.target.value)}
-                />
-              <label htmlFor="search" className="form__label">Search</label>
-            </div>
-            <LoadingButton
-              loadingPosition="center"
-              variant="outlined"
-              onClick={() => handleClick(input)}
-              loading={status === 'loading' ? true : false}
-            >
-              <SearchOutlinedIcon />
-            </LoadingButton>
-          </div>
-        </Header>
-        <hr style={{ margin: '1rem auto 0', width: '98%' }} />
-      </div>
-      <div className="earningsContainer">
+      <Grid item xs={12} >
+          <Grid container justifyContent='space-between' sx={{ borderBottom: '2px solid #272b35', padding: '1rem 0', color: '#fff'}}>
+            <Grid item xl={7} lg={6} md={5} sm={12} xs={12} py={1}>
+              <div className='headerText'>
+                <h1>Earnings Sheet Data</h1>
+                <p>Search for a Companys' Earnings data</p>
+              </div>
+            </Grid>
+            <Grid item xl={4} lg={6} md={7} sm={12} xs={12} py={1}>
+              <Grid container className='searchInput' justifyContent="flex-end" spacing={2}>
+                <Grid item xs={3}>
+                  <FormControl sx={{ height: '100%', width: '100%'}}>          
+                    <Select
+                      value={select}
+                      sx={{ color: "primary.main" }}
+                      onChange={handleChange}
+                    >
+                      <MenuItem value={"annualReports"} >Annual</MenuItem>
+                      <MenuItem value={"quarterlyReports"} >Quarterly</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={6} sx={{height: '100%', width: '100%'}} alignSelf='flex-end'>
+                  <div className="form__group field">
+                    <input
+                      type="text"
+                      className="form__field" 
+                      placeholder="Search"
+                      name="search" id='name' 
+                      required 
+                      autoComplete={'false'}
+                      onChange={(e) => setInput(e.target.value)}
+                      onKeyPress={(e) => e.key === "Enter" && handleClick(input)}
+                      />
+                  </div>
+                </Grid>
+                <Grid item xs={3}>
+                  <LoadingButton
+                    variant="outlined"
+                    onClick={() => handleClick(input)}
+                    loading={status === 'loading' ? true : false}
+                    loadingPosition="center"
+                    style={{ height: '100%', width: '100%' }}
+                  >
+                    <SearchOutlinedIcon />
+                  </LoadingButton>
+                </Grid>
+              </Grid> 
+            </Grid>
+          </Grid>
+      </Grid>
+      <Grid item className="earningsContainer" sx={{height: '85%'}} xs={12}>
         <Container>
           <div className="titleContainer">
             <h2>Company Symbol: {earningsData.symbol}</h2>
@@ -114,9 +107,8 @@ export const EarningsStatement = () => {
           {
             select === "annualReports" ? <EarningsAnnualList /> : <EarningsQuarterlyList />
           }
-            
         </Container>
-      </div>   
+      </Grid>  
     </>
   )
 }

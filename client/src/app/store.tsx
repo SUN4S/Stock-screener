@@ -1,16 +1,17 @@
-import activeReducer from '../features/activeSlice';
-import { configureStore } from '@reduxjs/toolkit';
-import searchReducer from '../features/searchSlice';
 import { TypedUseSelectorHook, useSelector } from "react-redux";
-import incomeReducer from '../features/fundamentals/incomeSlice';
+
+import activeReducer from '../features/activeSlice';
 import balanceReducer from '../features/fundamentals/balanceSlice';
 import cashFlowReducer from '../features/fundamentals/cashFlowSlice';
-import earningsReducer from '../features/fundamentals/earningsSlice';
-import overviewReducer from '../features/fundamentals/overviewSlice';
-import interdayReducer from '../features/charts/interdaySlice';
+import { configureStore } from '@reduxjs/toolkit';
 import dailyReducer from '../features/charts/dailySlice';
-import weeklyReducer from '../features/charts/weeklySlice';
+import earningsReducer from '../features/fundamentals/earningsSlice';
+import incomeReducer from '../features/fundamentals/incomeSlice';
+import interdayReducer from '../features/charts/interdaySlice';
 import monthlyReducer from '../features/charts/monthlySlice'
+import overviewReducer from '../features/fundamentals/overviewSlice';
+import searchReducer from '../features/searchSlice';
+import weeklyReducer from '../features/charts/weeklySlice';
 
 export const store = configureStore({
   reducer: {

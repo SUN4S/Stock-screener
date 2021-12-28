@@ -1,7 +1,7 @@
+import { CompanyFetchState } from '../models/searchData';
 import { RootState } from "../app/store";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchCompanies } from "./fetchCompanies";
-import { CompanyFetchState } from '../models/searchData';
 
 const initialState = {
   data: {

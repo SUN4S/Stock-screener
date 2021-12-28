@@ -1,7 +1,7 @@
+import { OverviewFetchState } from "../../models/fundamentalData";
 import { RootState } from "../../app/store";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchFundamentalsOverview } from "./fetchFundamentals";
-import { OverviewFetchState } from "../../models/fundamentalData";
 
 const initialState = {
   data: {

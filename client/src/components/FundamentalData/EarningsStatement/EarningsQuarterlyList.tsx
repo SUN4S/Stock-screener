@@ -1,8 +1,8 @@
-import React from 'react'
+import { A11y, Navigation, Pagination } from 'swiper';
 import {Swiper, SwiperSlide} from 'swiper/react/swiper-react';
-import { Navigation, Pagination, A11y } from 'swiper';
-import { EarningsStateQuarterly } from '../../../models/fundamentalData';
 
+import { EarningsStateQuarterly } from '../../../models/fundamentalData';
+import React from 'react'
 import { RootState } from '../../../app/store';
 import { useSelector } from 'react-redux';
 
@@ -14,10 +14,20 @@ export const EarningsQuarterlyList = () => {
     <>
     <Swiper 
       modules={[Navigation, Pagination, A11y]}
-      slidesPerView={3}
+      slidesPerView={1}
       navigation
       pagination={{ clickable: true }}
       noSwiping={false}
+      breakpoints={{
+        // when window width is >= 640px
+        900: {
+          slidesPerView: 3,
+        },
+        // when window width is >= 768px
+        600: {
+          slidesPerView: 2,
+        },
+      }}
       >
       {
         !earningsError === null

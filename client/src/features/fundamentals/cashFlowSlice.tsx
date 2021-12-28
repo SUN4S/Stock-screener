@@ -1,7 +1,7 @@
+import { CashFlowFetchState } from "../../models/fundamentalData";
 import { RootState } from "../../app/store";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchFundamentalsCashFlow } from "./fetchFundamentals";
-import { CashFlowFetchState } from "../../models/fundamentalData";
 
 const initialState = {
   data: {

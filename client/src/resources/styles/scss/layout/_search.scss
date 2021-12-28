@@ -1,0 +1,42 @@
+.searchContainer {
+  background-color: $bg-dark;
+  border-radius: 6px;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .searchResult {
+    height: 90%;
+    width: 100%;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr; 
+    column-gap: 10px;
+    gap: 30px;
+    overflow-y: auto;
+    
+    @media (max-width: 1200px) {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr; 
+    }
+
+    @media (max-width: 600px) {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 1rem;
+    }
+
+    h2 {
+      width: 100%;
+      font-weight: 300;
+
+      span {
+        margin: 0 auto;
+      }
+    }
+  }
+}

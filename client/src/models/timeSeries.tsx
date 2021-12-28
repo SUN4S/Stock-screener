@@ -16,8 +16,15 @@ export interface SelectTimeInterday {
   "5. volume": string
 }
 
+export interface InterdayData {
+  "Meta Data": MetaDataInterday;
+  "Time Series (5min)": {
+    [key: string]: SelectTimeInterday
+  };
+}
+
 export interface ChartFetchInterdayState {
-  data: string;
+  data: InterdayData;
   status: "loading" | "idle";
   error: string | null;
 };
@@ -25,7 +32,9 @@ export interface ChartFetchInterdayState {
 // ------------- Daily models ---------------- //
 export interface DailyData {
   "Meta Data": MetaDataDaily,
-  "Time Series (Daily)": SelectTimeDaily[]
+  "Time Series (Daily)": {
+    [key: string]: SelectTimeDaily
+  }
 }
 
 export interface MetaDataDaily {
@@ -53,7 +62,9 @@ export interface ChartFetchDailyState {
 // ------------- Weekly models ---------------- //
 export interface WeeklyData {
   "Meta Data": MetaDataWeekly,
-  "Weekly Adjusted Time Series": SelectTimeWeekly[]
+  "Weekly Adjusted Time Series": {
+    [key: string]: SelectTimeWeekly
+  }
 }
 
 export interface MetaDataWeekly {
@@ -82,7 +93,9 @@ export interface ChartFetchWeeklyState {
 // ------------- Monthly models ---------------- //
 export interface MonthlyData {
   "Meta Data": MetaDataMonthly,
-  "Monthly Adjusted Time Series": SelectTimeMonthly[]
+  "Monthly Adjusted Time Series": {
+    [key: string]: SelectTimeMonthly
+  }
 }
 
 export interface MetaDataMonthly {

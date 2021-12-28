@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import { A11y, Navigation, Pagination } from 'swiper';
+import React, { useEffect, useState } from 'react'
 import {Swiper, SwiperSlide} from 'swiper/react/swiper-react';
-import { Navigation, Pagination, A11y } from 'swiper';
 
 import { RootState } from '../../../app/store';
 import { useSelector } from 'react-redux';
@@ -10,7 +10,6 @@ export const OverviewList = () => {
   const overviewError = useSelector((state: RootState) => state.overview.error);
   const [currency, setCurrency] = useState<string | undefined>('USD');
 
-  console.log(overviewData)
   useEffect(() => {
     setCurrency(overviewData.Currency);
   }, [overviewData])

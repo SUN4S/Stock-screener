@@ -1,6 +1,6 @@
+import Paper from '@mui/material/Paper';
 import React from 'react'
 import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
 
 const FooterStyle = styled(Paper)(({theme}) => ({
   height: '5vh',
@@ -13,12 +13,16 @@ const FooterStyle = styled(Paper)(({theme}) => ({
   alignItems: 'center',
   justifyContent: 'flex-start',
   padding: '0 3rem',
+  'a': {
+    paddingRight: '2rem',
+  }
 }));
 
 export const Footer = () => {
   return (
     <FooterStyle>
-      <a href="google.com"> Some Link </a>
+      <a href="https://www.investopedia.com/"> Investopedia </a>
+      <a href="https://finance.yahoo.com/"> Yahoo Finance </a>
     </FooterStyle>
   )
 }

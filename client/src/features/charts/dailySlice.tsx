@@ -1,11 +1,33 @@
+import { ChartFetchDailyState } from "../../models/timeSeries";
 import { RootState } from "../../app/store";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchDailyChartData } from "./fetchCharts";
-import { ChartFetchDailyState } from "../../models/timeSeries";
 
 const initialState = {
   data: {
-    
+    "Meta Data": {
+      "1. Information": "Daily Prices (open, high, low, close) and Volumes",
+      "2. Symbol": "CVX",
+      "3. Last Refreshed": "2021-12-27",
+      "4. Output Size": "Full size",
+      "5. Time Zone": "US/Eastern"
+  },
+    "Time Series (Daily)": {
+      "2021-12-27": {
+          "1. open": "116.0700",
+          "2. high": "118.8200",
+          "3. low": "115.4101",
+          "4. close": "118.7900",
+          "5. volume": "7746498"
+      },
+      "2021-12-23": {
+          "1. open": "116.5100",
+          "2. high": "117.9200",
+          "3. low": "116.4000",
+          "4. close": "116.4100",
+          "5. volume": "7416618"
+      },
+    }
   },
   error: null,
   status: "idle",

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import { A11y, Navigation, Pagination } from 'swiper';
+import React, { useEffect, useState } from 'react'
 import {Swiper, SwiperSlide} from 'swiper/react/swiper-react';
-import { Navigation, Pagination, A11y } from 'swiper';
-import { IncomeStatementQuarterly } from '../../../models/fundamentalData';
 
+import { IncomeStatementQuarterly } from '../../../models/fundamentalData';
 import { RootState } from '../../../app/store';
 import { useSelector } from 'react-redux';
 
@@ -11,7 +11,6 @@ export const IncomeQuarterlyList = () => {
   const incomeError = useSelector((state: RootState) => state.income.error);
   const [currency, setCurrency] = useState<string | undefined>('USD');
 
-  console.log(incomeData)
   useEffect(() => {
     setCurrency(incomeData.annualReports[0].reportedCurrency);
   }, [incomeData])

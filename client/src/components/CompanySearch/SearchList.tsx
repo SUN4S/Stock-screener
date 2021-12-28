@@ -1,9 +1,9 @@
+import Paper from '@mui/material/Paper';
 import React from 'react'
+import { RootState } from '../../app/store';
+import StarIcon from '@mui/icons-material/Star';
 import { Tooltip } from '@mui/material'
 import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import StarIcon from '@mui/icons-material/Star';
-import { RootState } from '../../app/store';
 import { useSelector } from 'react-redux';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -35,17 +35,17 @@ export const SearchList: React.FC = () => {
         return(
           <Tooltip title="Copy symbol to clipboard" arrow>
             <Item key={i} onClick={() => navigator.clipboard.writeText(match["1. symbol"])}>            
-              <h3>
+              <h2>
                 Symbol: {match["1. symbol"]} 
                 {i === 0 
                   ? <StarIcon style={{ float: 'right' }}/>
                   : null} 
-              </h3>
-              <h3>Name: {match["2. name"]}</h3>
-              <h3>Type: {match["3. type"]}</h3>
-              <h3>Region: {match["4. region"]}</h3>
-              <h3>Time Zone: {match["7. timezone"]}</h3>
-              <h3>Currency: {match["8. currency"]}</h3>
+              </h2>
+              <h2>Name: {match["2. name"]}</h2>
+              <h2>Type: {match["3. type"]}</h2>
+              <h2>Region: {match["4. region"]}</h2>
+              <h2>Time Zone: {match["7. timezone"]}</h2>
+              <h2>Currency: {match["8. currency"]}</h2>
             </Item>
           </Tooltip>
         )

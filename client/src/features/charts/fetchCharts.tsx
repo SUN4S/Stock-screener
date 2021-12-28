@@ -1,14 +1,16 @@
-import axios from 'axios';
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { 
+import {
   DailyData,
-  WeeklyData,
+  FetchChartError,
+  InterdayData,
   MonthlyData,
-  FetchChartError, 
+  WeeklyData,
 } from '../../models/timeSeries';
 
+import axios from 'axios';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
 export const fetchInterdayChartData = createAsyncThunk<
-  string,
+  InterdayData,
   string,
   { rejectValue: FetchChartError }>
   (
@@ -19,7 +21,7 @@ export const fetchInterdayChartData = createAsyncThunk<
     const response = await axios(`/api/v1/stocktime/interday/${input}`);
     await console.log(response.data);
     // Get the JSON from the response:
-    const data: string = await response.data;
+    const data: InterdayData = await response.data;
     
     // Check if status is not okay:
     if (!data) {

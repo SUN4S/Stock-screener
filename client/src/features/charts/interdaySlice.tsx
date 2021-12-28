@@ -1,11 +1,35 @@
+import { ChartFetchInterdayState } from "../../models/timeSeries";
 import { RootState } from "../../app/store";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchInterdayChartData } from "./fetchCharts";
-import { ChartFetchInterdayState } from "../../models/timeSeries";
 
 const initialState = {
-  data: 
-    "timestamp,open,high,low,close,volume\r\n2021-12-22 20:00:00,333.7500,333.7500,333.7500,333.7500,1470\r\n2021-12-22 19:55:00,333.6200,333.6200,333.5600,333.5600,745\r\n2021-12-22 19:45:00,333.4600,333.6500,333.4600,333.6500,657\r\n2021-12-22 19:40:00,333.4600,333.4600,333.4600,333.4600,217",
+  data: {
+    "Meta Data": {
+      "1. Information": "Intraday (5min) open, high, low, close prices and volume",
+      "2. Symbol": "msft",
+      "3. Last Refreshed": "2021-12-27 20:00:00",
+      "4. Interval": "5min",
+      "5. Output Size": "Full size",
+      "6. Time Zone": "US/Eastern"
+  },
+    "Time Series (5min)": {
+      "2021-12-27 20:00:00": {
+          "1. open": "341.6000",
+          "2. high": "341.9400",
+          "3. low": "341.6000",
+          "4. close": "341.7000",
+          "5. volume": "6166"
+      },
+      "2021-12-27 19:55:00": {
+          "1. open": "341.5100",
+          "2. high": "341.6800",
+          "3. low": "341.5100",
+          "4. close": "341.6500",
+          "5. volume": "1116"
+      },
+    },
+  },
   error: null,
   status: "idle",
 } as ChartFetchInterdayState;

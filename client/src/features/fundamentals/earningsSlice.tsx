@@ -1,7 +1,7 @@
+import { EarningsFetchState } from "../../models/fundamentalData";
 import { RootState } from "../../app/store";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchFundamentalsEarnings } from "./fetchFundamentals";
-import { EarningsFetchState } from "../../models/fundamentalData";
 
 const initialState = {
   data: {
