@@ -17,7 +17,8 @@ import { useSelector } from 'react-redux';
 
 export const InterdayData = () => {
   const interdayData = useSelector((state: RootState) => state.interday.data);
-  //const interdayError = useSelector((state: RootState) => state.interday.error);
+  const interdayStatus = useSelector((state: RootState) => state.interday.status);
+  const interdayError = useSelector((state: RootState) => state.interday.error);
   const [labels, setLabels] = useState<string[]>([]);
   const [interdayClose, setinterdayClose] = useState<number[]>([]);
   const [recentData, setRecentData] = useState<any>();
@@ -40,6 +41,7 @@ export const InterdayData = () => {
           <h3>Volume: {value['5. volume']}</h3>
         </>
       )
+      break;
     }
   }, [interdayData])
 
@@ -100,17 +102,28 @@ export const InterdayData = () => {
 
   return (
     <>
-      <Grid container className="chartContainer" >
-        <Grid item xs={12} className="titleContainer" alignSelf='flex-start'>
-          <h2>Company Symbol: {interdayData['Meta Data']['2. Symbol'].toUpperCase()}</h2>
-        </Grid>
-        <Grid item xs={12} lg={3} className="mostRecent">
-          {recentData}
-        </Grid>
-        <Grid item xs={12} lg={9} className="drawChart">
-          <Line options={options} data={data} />
-        </Grid>
-      </Grid>   
+      <Grid item xs={12} className="titleContainer" alignSelf='flex-start'>
+        <h2>Company Symbol: {
+          (interdayError === null) 
+            ? interdayData['Meta Data']['2. Symbol'].toUpperCase() 
+            : '???'
+          }
+        </h2>
+      </Grid>
+        {
+          (interdayStatus === "loading" )
+          ? (<div className="centeringDiv"><h1>Loading...</h1></div>)
+          : (interdayError === null) 
+            ? <>
+                <Grid item xs={12} lg={3} className="mostRecent">
+                  {recentData}
+                </Grid>
+                <Grid item xs={12} lg={9} className="drawChart">
+                  <Line options={options} data={data} />
+                </Grid>
+              </>
+            : (<div className="centeringDiv"><h1>{interdayError}</h1></div>)
+        }
     </>
   )
 }

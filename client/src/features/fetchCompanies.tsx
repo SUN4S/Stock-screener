@@ -16,10 +16,8 @@ export const fetchCompanies = createAsyncThunk<
     // Get the JSON from the response:
     const data: SearchState = await response.data;
     
-    await console.log(data);
-
     // Check if status is not okay:
-    if (!data["bestMatches"]) {
+    if (!data["bestMatches"][0]) {
       // Return the error message:
       return thunkApi.rejectWithValue({ 
         message: "Failed to fetch company list." 

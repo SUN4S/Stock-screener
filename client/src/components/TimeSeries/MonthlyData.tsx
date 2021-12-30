@@ -17,7 +17,8 @@ import { useSelector } from 'react-redux';
 
 export const MonthlyData = () => {
   const monthlyData = useSelector((state: RootState) => state.monthly.data);
-  //const dailyError = useSelector((state: RootState) => state.monthly.error);
+  const monthlyStatus = useSelector((state: RootState) => state.monthly.status);
+  const monthlyError = useSelector((state: RootState) => state.monthly.error);
   const [labels, setLabels] = useState<string[]>([]);
   const [monthlyClose, setMonthlyClose] = useState<number[]>([]);
   const [recentData, setRecentData] = useState<any>();
@@ -100,17 +101,28 @@ export const MonthlyData = () => {
 
   return (
     <>
-      <Grid container className="chartContainer" >
-        <Grid item xs={12} className="titleContainer" alignSelf='flex-start'>
-          <h2>Company Symbol: {monthlyData['Meta Data']['2. Symbol'].toUpperCase()}</h2>
-        </Grid>
-        <Grid item xs={12} lg={3} className="mostRecent">
-          {recentData}
-        </Grid>
-        <Grid item xs={12} lg={9} className="drawChart">
-          <Line options={options} data={data} />
-        </Grid>
-      </Grid>   
+      <Grid item xs={12} className="titleContainer" alignSelf='flex-start'>
+        <h2>Company Symbol: {
+            (monthlyError === null) 
+              ? monthlyData['Meta Data']['2. Symbol'].toUpperCase() 
+              : '???'
+            }
+        </h2>
+      </Grid>
+      {
+        (monthlyStatus === "loading" )
+        ? (<div className="centeringDiv"><h1>Loading...</h1></div>)
+        : (monthlyError === null) 
+          ? <>
+              <Grid item xs={12} lg={3} className="mostRecent">
+                {recentData}
+              </Grid>
+              <Grid item xs={12} lg={9} className="drawChart">
+                <Line options={options} data={data} />
+              </Grid>
+            </>
+          : (<div className="centeringDiv"><h1>{monthlyError}</h1></div>)
+      } 
     </>
   )
 }

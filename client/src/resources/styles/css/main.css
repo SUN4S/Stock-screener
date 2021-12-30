@@ -38,20 +38,22 @@
 
 .swiper .swiper-slide .left h3 {
   width: 100%;
-  height: 10%;
+  height: 15%;
   border-bottom: 1px solid #42A5F5;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .swiper .swiper-slide .left h3 .dataName {
   float: left;
   width: 50%;
   text-align: start;
+  overflow-y: auto;
 }
 
 .swiper .swiper-slide .left h3 .dataValue {
   width: 50%;
+  max-height: 70px;
   float: right;
   text-align: end;
   overflow-y: auto;
@@ -72,17 +74,19 @@
   height: 10%;
   border-bottom: 1px solid #42A5F5;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .swiper .swiper-slide .right h3 .dataName {
   float: left;
   width: 50%;
   text-align: start;
+  overflow-y: auto;
 }
 
 .swiper .swiper-slide .right h3 .dataValue {
   width: 50%;
+  max-height: 70px;
   float: right;
   text-align: end;
   overflow-y: auto;
@@ -252,6 +256,10 @@ nav {
   margin: 0 auto;
 }
 
+.searchContainer h1 {
+  color: #fff;
+}
+
 .incomeContainer {
   width: 100%;
   height: 100%;
@@ -272,6 +280,10 @@ nav {
   color: #000;
 }
 
+.incomeContainer h1 {
+  color: #fff;
+}
+
 .balanceContainer {
   width: 100%;
   height: 100%;
@@ -288,6 +300,10 @@ nav {
 
 .balanceContainer .titleContainer h2 {
   color: #000;
+}
+
+.balanceContainer h1 {
+  color: #fff;
 }
 
 .cashFlowContainer {
@@ -310,6 +326,10 @@ nav {
   color: #000;
 }
 
+.cashFlowContainer h1 {
+  color: #fff;
+}
+
 .earningsContainer {
   width: 100%;
   height: 100%;
@@ -328,6 +348,10 @@ nav {
 
 .earningsContainer .titleContainer h2 {
   color: #000;
+}
+
+.earningsContainer h1 {
+  color: #fff;
 }
 
 .overviewContainer {
@@ -350,6 +374,10 @@ nav {
   color: #000;
 }
 
+.overviewContainer h1 {
+  color: #fff;
+}
+
 .chartContainer {
   width: 100%;
   height: 100%;
@@ -369,6 +397,10 @@ nav {
 
 .chartContainer .titleContainer h2 {
   color: #000;
+}
+
+.chartContainer h1 {
+  color: #fff;
 }
 
 .chartContainer .mostRecent {
@@ -406,6 +438,14 @@ nav {
 
 .chartContainer .drawChart canvas {
   height: 100%;
+}
+
+.centeringDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 97%;
+  width: 100%;
 }
 
 * {

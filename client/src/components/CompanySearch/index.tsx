@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 
 import { Grid } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { SearchList } from './SearchList';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { fetchCompanies } from '../../features/fetchCompanies';
 import { selectStatus } from '../../features/searchSlice';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from "../../app/store";
+
+const SearchList = lazy( () => import('./SearchList')
+  .then(({SearchList}) => ({ default: SearchList})),
+);
 
 const CompanySearch: React.FC = () => {
   const [input, setInput] = useState<string | any>();
@@ -59,7 +62,11 @@ const CompanySearch: React.FC = () => {
               </LoadingButton>
             </Grid>
           </Grid> 
-        <SearchList />
+        {
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <SearchList />
+          </Suspense>
+        }
       </Grid>
     </>
   )

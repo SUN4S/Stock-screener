@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
+import React, { Suspense, lazy, useState } from 'react'
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { BalanceAnnualList } from './BalanceAnnualLIst';
-import { BalanceQuarterlyList } from './BalanceQuarterlyList';
 import FormControl from '@mui/material/FormControl';
 import { Grid } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -15,6 +13,14 @@ import { fetchFundamentalsBalance } from '../../../features/fundamentals/fetchFu
 import { selectStatus } from '../../../features/fundamentals/balanceSlice';
 import { styled } from '@mui/material/styles';
 import { useTypedSelector } from "../../../app/store";
+
+const BalanceAnnualList = lazy( () => import('./BalanceAnnualLIst')
+  .then(({BalanceAnnualList}) => ({ default: BalanceAnnualList})),
+);
+
+const BalanceQuarterlyList = lazy( () => import('./BalanceQuarterlyList')
+  .then(({BalanceQuarterlyList}) => ({ default: BalanceQuarterlyList})),
+);
 
 const Container = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -36,6 +42,7 @@ export const BalanceStatement = () => {
 
   const status = useTypedSelector(selectStatus);
   const balanceData = useSelector((state: RootState) => state.balance.data);
+  const balanceError = useSelector((state: RootState) => state.balance.error);
 
   const dispatch = useDispatch();
 
@@ -100,14 +107,28 @@ export const BalanceStatement = () => {
             </Grid>
           </Grid>
       </Grid>
-      <Grid item className="balanceContainer" sx={{height: '85%'}} xs={12}>
+      <Grid item className="overviewContainer" sx={{height: '85%'}} xs={12}>
         <Container>
-          <div className="titleContainer">
-            <h2>Company Symbol: {balanceData.symbol}</h2>
-          </div>
-          {
-            select === "annualReports" ? <BalanceAnnualList /> : <BalanceQuarterlyList />
-          }
+          <Grid container xs={12} sx={{ overflowY: "hidden"}}>
+            <Grid item xs={12} alignSelf='flex-start' className="titleContainer">
+              <h2>Company Symbol: {(balanceError === null) ? balanceData.symbol : '???'}</h2>
+            </Grid>
+            <Grid item xs={12} sx={{height: '100%'}}>
+              {
+                select === "annualReports" 
+                ? (
+                  <Suspense fallback={<h1>Loading...</h1>}>
+                    <BalanceAnnualList />
+                  </Suspense>
+                )
+                : (
+                  <Suspense fallback={<h1>Loading...</h1>}>
+                    <BalanceQuarterlyList />
+                  </Suspense>
+                )
+              }
+            </Grid>
+          </Grid>
         </Container>
       </Grid>   
     </>

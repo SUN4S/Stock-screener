@@ -4,10 +4,12 @@ import {Swiper, SwiperSlide} from 'swiper/react/swiper-react';
 import { EarningsStateQuarterly } from '../../../models/fundamentalData';
 import React from 'react'
 import { RootState } from '../../../app/store';
+import { TableListItem } from '../TableListItem';
 import { useSelector } from 'react-redux';
 
 export const EarningsQuarterlyList = () => { 
   const earningsData = useSelector((state: RootState) => state.earnings.data);
+  const earningsStatus = useSelector((state: RootState) => state.earnings.status);
   const earningsError = useSelector((state: RootState) => state.earnings.error);
 
   return (
@@ -30,42 +32,35 @@ export const EarningsQuarterlyList = () => {
       }}
       >
       {
-        !earningsError === null
-        ? <SwiperSlide>
-            <h1>{earningsError}</h1>
+      (earningsStatus === "loading")
+      ? <SwiperSlide>
+          <div className="centeringDiv"><h1>Loading...</h1></div>
+        </SwiperSlide>
+      : (earningsError === null) 
+        ? earningsData.quarterlyEarnings.map((item: EarningsStateQuarterly) => {
+            return(
+              <SwiperSlide>
+                <div className="content">
+                  {                   
+                    Object
+                    .entries(item)
+                    .map(
+                      ([key, value]) => {
+                        return(
+                          <TableListItem type={key} value={value} />
+                        )
+                      }                   
+                    )                 
+                  }
+                </div>
+              </SwiperSlide>
+            )              
+          })
+        : (
+          <SwiperSlide>
+            <div className="centeringDiv"><h1>{earningsError}</h1></div>
           </SwiperSlide>
-        : earningsData.quarterlyEarnings.map((item: EarningsStateQuarterly) => {
-          return(
-            <SwiperSlide>
-              <div className="content">
-                <h3>
-                  <span className='dataName'>Fiscal Date End:</span>
-                  <span className='dataValue'>{item.fiscalDateEnding}</span>
-                </h3>
-                <h3>
-                  <span className='dataName'>Reported Date:</span>
-                  <span className='dataValue'>{item.reportedDate}</span>
-                </h3>
-                <h3>
-                  <span className='dataName'>Reported EPS:</span>
-                  <span className='dataValue'>{item.reportedEPS}</span>
-                </h3>
-                <h3>
-                  <span className='dataName'>Estimated EPS:</span>
-                  <span className='dataValue'>{item.estimatedEPS}</span>
-                </h3>
-                <h3>
-                  <span className='dataName'>Surprise:</span>
-                  <span className='dataValue'>{item.surprise}</span>
-                </h3>
-                <h3>
-                  <span className='dataName'>Surprise Percentage:</span>
-                  <span className='dataValue'>{item.surprisePercentage}</span>
-                </h3>
-              </div>
-            </SwiperSlide>
-          )         
-        })
+        )
       }
       </Swiper>
     </>

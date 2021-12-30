@@ -25,31 +25,37 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export const SearchList: React.FC = () => {
-  const search = useSelector((state: RootState) => state.search.data);
+  const searchData = useSelector((state: RootState) => state.search.data);
+  const searchStatus = useSelector((state: RootState) => state.search.status);
+  const searchError = useSelector((state: RootState) => state.search.error);
 
   return (
     <div className="searchResult">
-      {!search
-        ? <h1>No data</h1> 
-        : search.bestMatches.filter((item: any, idx: any) => idx < 6).map((match: any, i: any) => {
-        return(
-          <Tooltip title="Copy symbol to clipboard" arrow>
-            <Item key={i} onClick={() => navigator.clipboard.writeText(match["1. symbol"])}>            
-              <h2>
-                Symbol: {match["1. symbol"]} 
-                {i === 0 
-                  ? <StarIcon style={{ float: 'right' }}/>
-                  : null} 
-              </h2>
-              <h2>Name: {match["2. name"]}</h2>
-              <h2>Type: {match["3. type"]}</h2>
-              <h2>Region: {match["4. region"]}</h2>
-              <h2>Time Zone: {match["7. timezone"]}</h2>
-              <h2>Currency: {match["8. currency"]}</h2>
-            </Item>
-          </Tooltip>
-        )
-      })}
+      { 
+        (searchStatus === "loading" )
+          ? (<div className="centeringDiv"><h1>Loading...</h1></div>)
+         :(searchError === null)
+          ? searchData.bestMatches.filter((item: any, idx: any) => idx < 6).map((match: any, i: any) => {
+          return(
+            <Tooltip title="Copy symbol to clipboard" arrow>
+              <Item key={i} onClick={() => navigator.clipboard.writeText(match["1. symbol"])}>            
+                <h2>
+                  Symbol: {match["1. symbol"]} 
+                  {i === 0 
+                    ? <StarIcon style={{ float: 'right' }}/>
+                    : null} 
+                </h2>
+                <h2>Name: {match["2. name"]}</h2>
+                <h2>Type: {match["3. type"]}</h2>
+                <h2>Region: {match["4. region"]}</h2>
+                <h2>Time Zone: {match["7. timezone"]}</h2>
+                <h2>Currency: {match["8. currency"]}</h2>
+              </Item>
+            </Tooltip>
+          )
+        })
+        : (<div className="centeringDiv"><h1>{searchError}</h1></div>) 
+      }
     </div>
   )
 }

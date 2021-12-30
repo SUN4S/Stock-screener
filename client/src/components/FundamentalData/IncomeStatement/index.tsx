@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, Suspense, lazy } from 'react'
 import { RootState, useTypedSelector } from "../../../app/store";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useDispatch, useSelector } from 'react-redux';
 
 import FormControl from '@mui/material/FormControl';
 import { Grid } from '@mui/material';
-import { IncomeAnnualList } from './IncomeAnnualList';
-import { IncomeQuarterlyList } from './IncomeQuarterlyList';
 import LoadingButton from '@mui/lab/LoadingButton';
 import MenuItem from '@mui/material/MenuItem';
 import Paper from '@mui/material/Paper';
@@ -14,6 +12,14 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { fetchFundamentalsIncome } from '../../../features/fundamentals/fetchFundamentals';
 import { selectStatus } from '../../../features/fundamentals/incomeSlice';
 import { styled } from '@mui/material/styles';
+
+const IncomeAnnualList = lazy( () => import('./IncomeAnnualList')
+  .then(({IncomeAnnualList}) => ({ default: IncomeAnnualList})),
+);
+
+const IncomeQuarterlyList = lazy( () => import('./IncomeQuarterlyList')
+  .then(({IncomeQuarterlyList}) => ({ default: IncomeQuarterlyList})),
+);
 
 const Container = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -100,16 +106,30 @@ export const IncomeStatement = () => {
             </Grid>
           </Grid>
       </Grid>
-      <Grid item className="earningsContainer" sx={{height: '85%'}} xs={12}>
+      <Grid item className="incomeContainer" sx={{height: '85%'}} xs={12}>
         <Container>
-          <div className="titleContainer">
-            <h2>Company Symbol: {incomeData.symbol}</h2>
-          </div>
-          {
-            select === "annualReports" ? <IncomeAnnualList /> : <IncomeQuarterlyList />
-          }
+          <Grid container xs={12} sx={{ overflowY: "hidden"}}>
+            <Grid item xs={12} alignSelf='flex-start' className="titleContainer">
+              <h2>Company Symbol: {incomeData.symbol}</h2>
+            </Grid>
+            <Grid item xs={12} sx={{height: '100%'}}>
+              {
+                select === "annualReports" 
+                ? (
+                  <Suspense fallback={<h1>Loading...</h1>}>
+                    <IncomeAnnualList />
+                  </Suspense>
+                )
+                : (
+                  <Suspense fallback={<h1>Loading...</h1>}>
+                    <IncomeQuarterlyList />
+                  </Suspense>
+                )
+              }
+            </Grid>
+          </Grid>
         </Container>
-      </Grid>   
+      </Grid>    
     </>
   )
 }

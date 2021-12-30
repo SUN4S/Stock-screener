@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, Suspense, lazy } from 'react'
 import { RootState, useTypedSelector } from '../../../app/store';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Grid } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { OverviewList } from './OverviewList';
 import Paper from '@mui/material/Paper';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { fetchFundamentalsOverview } from '../../../features/fundamentals/fetchFundamentals';
 import { selectStatus } from '../../../features/fundamentals/overviewSlice';
 import { styled } from '@mui/material/styles';
+
+const OverviewList = lazy( () => import('./OverviewList')
+  .then(({OverviewList}) => ({ default: OverviewList})),
+);
 
 const Container = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -80,10 +83,18 @@ export const OverviewStatement = () => {
       </Grid>
       <Grid item className="balanceContainer" sx={{height: '85%'}} xs={12}>
         <Container>
-          <div className="titleContainer">
-            <h2>Company Symbol: {overviewData.Symbol}</h2>
-          </div>
-            <OverviewList />
+          <Grid container xs={12} sx={{ overflowY: "hidden"}}>
+            <Grid item xs={12} alignSelf='flex-start' className="titleContainer">
+              <h2>Company Symbol: {overviewData.Symbol}</h2>
+            </Grid>
+            <Grid item xs={12} sx={{height: '100%'}}>
+              {
+                <Suspense fallback={<h1>Loading...</h1>}>
+                  <OverviewList />
+                </Suspense>
+              }
+            </Grid>
+          </Grid>
         </Container>
       </Grid>  
     </>

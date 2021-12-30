@@ -1,34 +1,46 @@
-import React, { useEffect, useState } from 'react'
+import React, { useMemo, useState, Suspense, lazy } from 'react';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { fetchDailyChartData, fetchInterdayChartData, fetchMonthlyChartData, fetchWeeklyChartData } from '../../features/charts/fetchCharts';
 
-import { DailyData } from './DailyData';
 import FormControl from '@mui/material/FormControl';
 import { Grid } from '@mui/material';
-import { InterdayData } from './InterdayData';
 import LoadingButton from '@mui/lab/LoadingButton';
 import MenuItem from '@mui/material/MenuItem';
-import { MonthlyData } from './MonthlyData';
 import Paper from '@mui/material/Paper';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import { WeeklyData } from './WeeklyData';
 import { selectStatus } from '../../features/charts/dailySlice';
 import { styled } from '@mui/material/styles';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from "../../app/store";
+
+const InterdayData = lazy( () => import('./InterdayData')
+  .then(({InterdayData}) => ({ default: InterdayData})),
+);
+
+const DailyData = lazy( () => import('./DailyData')
+  .then(({DailyData}) => ({ default: DailyData})),
+);
+
+const WeeklyData = lazy( () => import('./WeeklyData')
+  .then(({WeeklyData}) => ({ default: WeeklyData})),
+);
+
+const MonthlyData = lazy( () => import('./MonthlyData')
+  .then(({MonthlyData}) => ({ default: MonthlyData})),
+);
 
 const Container = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(0),
   textAlign: 'center',
   borderRadius: '5px',
-  color: theme.palette.text.secondary,
+  color: '#fff',
   backgroundColor: '#111827',
   height: '100%',
   display: 'flex',
   justifyContent: 'center',
   flexDirection: 'column',
-  overflowY: 'auto'
+  overflowY: 'auto',
 }));
 
 export const TimeSeries = () => {
@@ -60,7 +72,7 @@ export const TimeSeries = () => {
     }
   }
 
-  useEffect(() => {
+  useMemo(() => {
     switch (select) {
       case 'interday':
         setCurrentElement( <InterdayData /> );    
@@ -137,8 +149,14 @@ export const TimeSeries = () => {
           </Grid>
       </Grid>
       <Grid item sx={{height: '85%'}} xs={12}>
-        <Container>       
-          {currentElement}       
+        <Container>
+          <Grid container className="chartContainer" >
+            {
+              <Suspense fallback={<h1>Loading...</h1>}>
+                {currentElement}
+              </Suspense>
+            } 
+          </Grid>
         </Container>
       </Grid>
     </>

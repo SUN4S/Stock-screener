@@ -17,10 +17,12 @@ import { useSelector } from 'react-redux';
 
 export const DailyData = () => {
   const dailyData = useSelector((state: RootState) => state.daily.data);
-  //const dailyError = useSelector((state: RootState) => state.daily.error);
+  const dailyStatus = useSelector((state: RootState) => state.daily.status);
+  const dailyError = useSelector((state: RootState) => state.daily.error);
   const [labels, setLabels] = useState<string[]>([]);
   const [dailyHigh, setDailyHigh] = useState<number[]>([]);
   const [recentData, setRecentData] = useState<any>();
+  console.log(dailyStatus);
 
   useEffect(() => {
     setLabels([]);
@@ -100,17 +102,28 @@ export const DailyData = () => {
 
   return (
     <>
-      <Grid container className="chartContainer" >
-        <Grid item xs={12} className="titleContainer" alignSelf='flex-start'>
-          <h2>Company Symbol: {dailyData['Meta Data']['2. Symbol'].toUpperCase()}</h2>
-        </Grid>
-        <Grid item xs={12} lg={3} className="mostRecent">
-          {recentData}
-        </Grid>
-        <Grid item xs={12} lg={9} className="drawChart">
-          <Line options={options} data={data} />
-        </Grid>
-      </Grid>   
+      <Grid item xs={12} className="titleContainer" alignSelf='flex-start'>
+        <h2>Company Symbol: {
+            (dailyError === null) 
+              ? dailyData['Meta Data']['2. Symbol'].toUpperCase() 
+              : '???'
+            }
+        </h2>
+      </Grid>
+      {
+        (dailyStatus === "loading" )
+        ? (<div className="centeringDiv"><h1>Loading...</h1></div>)
+        : (dailyError === null) 
+          ? <>
+              <Grid item xs={12} lg={3} className="mostRecent">
+                {recentData}
+              </Grid>
+              <Grid item xs={12} lg={9} className="drawChart">
+                <Line options={options} data={data} />
+              </Grid>
+            </>
+          : (<div className="centeringDiv"><h1>{dailyError}</h1></div>)
+      }
     </>
   )
 }

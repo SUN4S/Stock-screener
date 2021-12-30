@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, Suspense, lazy } from 'react'
 import { RootState, useTypedSelector } from '../../../app/store';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { EarningsAnnualList } from './EarningsAnnualList';
-import { EarningsQuarterlyList } from './EarningsQuarterlyList';
 import FormControl from '@mui/material/FormControl';
 import { Grid } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -14,6 +12,14 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { fetchFundamentalsEarnings } from '../../../features/fundamentals/fetchFundamentals';
 import { selectStatus } from '../../../features/fundamentals/earningsSlice';
 import { styled } from '@mui/material/styles';
+
+const EarningsAnnualList = lazy( () => import('./EarningsAnnualList')
+  .then(({EarningsAnnualList}) => ({ default: EarningsAnnualList})),
+);
+
+const EarningsQuarterlyList = lazy( () => import('./EarningsQuarterlyList')
+  .then(({EarningsQuarterlyList}) => ({ default: EarningsQuarterlyList})),
+);
 
 const Container = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -101,12 +107,26 @@ export const EarningsStatement = () => {
       </Grid>
       <Grid item className="earningsContainer" sx={{height: '85%'}} xs={12}>
         <Container>
-          <div className="titleContainer">
-            <h2>Company Symbol: {earningsData.symbol}</h2>
-          </div>
-          {
-            select === "annualReports" ? <EarningsAnnualList /> : <EarningsQuarterlyList />
-          }
+          <Grid container xs={12} sx={{ overflowY: "hidden"}}>
+            <Grid item xs={12} alignSelf='flex-start' className="titleContainer">
+              <h2>Company Symbol: {earningsData.symbol}</h2>
+            </Grid>
+            <Grid item xs={12} sx={{height: '100%'}}>
+              {
+                select === "annualReports" 
+                ? (
+                  <Suspense fallback={<h1>Loading...</h1>}>
+                    <EarningsAnnualList />
+                  </Suspense>
+                )
+                : (
+                  <Suspense fallback={<h1>Loading...</h1>}>
+                    <EarningsQuarterlyList />
+                  </Suspense>
+                )
+              }
+            </Grid>
+          </Grid>
         </Container>
       </Grid>  
     </>

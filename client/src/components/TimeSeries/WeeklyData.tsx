@@ -17,7 +17,8 @@ import { useSelector } from 'react-redux';
 
 export const WeeklyData = () => {
   const weeklyData = useSelector((state: RootState) => state.weekly.data);
-  //const dailyError = useSelector((state: RootState) => state.weekly.error);
+  const weeklyStatus = useSelector((state: RootState) => state.weekly.status);
+  const weeklyError = useSelector((state: RootState) => state.weekly.error);
   const [labels, setLabels] = useState<string[]>([]);
   const [weeklyClose, setWeeklyClose] = useState<number[]>([]);
   const [recentData, setRecentData] = useState<any>();
@@ -100,17 +101,28 @@ export const WeeklyData = () => {
 
   return (
     <>
-      <Grid container className="chartContainer" >
-        <Grid item xs={12} className="titleContainer" alignSelf='flex-start'>
-          <h2>Company Symbol: {weeklyData['Meta Data']['2. Symbol'].toUpperCase()}</h2>
-        </Grid>
-        <Grid item xs={12} lg={3} className="mostRecent">
-          {recentData}
-        </Grid>
-        <Grid item xs={12} lg={9} className="drawChart">
-          <Line options={options} data={data} />
-        </Grid>
-      </Grid>   
+      <Grid item xs={12} className="titleContainer" alignSelf='flex-start'>
+        <h2>Company Symbol: {
+            (weeklyError === null) 
+              ? weeklyData['Meta Data']['2. Symbol'].toUpperCase() 
+              : '???'
+            }
+        </h2>
+      </Grid>
+      {
+        (weeklyStatus === "loading" )
+        ? (<div className="centeringDiv"><h1>Loading...</h1></div>)
+        : (weeklyError === null) 
+          ? <>
+              <Grid item xs={12} lg={3} className="mostRecent">
+                {recentData}
+              </Grid>
+              <Grid item xs={12} lg={9} className="drawChart">
+                <Line options={options} data={data} />
+              </Grid>
+            </>
+          : (<div className="centeringDiv"><h1>{weeklyError}</h1></div>)
+      }
     </>
   )
 }

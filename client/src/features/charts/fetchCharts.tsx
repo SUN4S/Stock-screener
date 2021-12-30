@@ -24,7 +24,7 @@ export const fetchInterdayChartData = createAsyncThunk<
     const data: InterdayData = await response.data;
     
     // Check if status is not okay:
-    if (!data) {
+    if (!data["Meta Data"]) {
       // Return the error message:
       return thunkApi.rejectWithValue({ 
         message: "Failed to fetch Chart data." 

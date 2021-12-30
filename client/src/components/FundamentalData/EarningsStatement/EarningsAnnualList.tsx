@@ -4,12 +4,13 @@ import {Swiper, SwiperSlide} from 'swiper/react/swiper-react';
 import { EarningsStateAnnual } from '../../../models/fundamentalData';
 import React from 'react'
 import { RootState } from '../../../app/store';
+import { TableListItem } from '../TableListItem';
 import { useSelector } from 'react-redux';
 
 export const EarningsAnnualList = () => { 
   const earningsData = useSelector((state: RootState) => state.earnings.data);
+  const earningsStatus = useSelector((state: RootState) => state.earnings.status);
   const earningsError = useSelector((state: RootState) => state.earnings.error);
-
 
   return (
     <>
@@ -31,6 +32,37 @@ export const EarningsAnnualList = () => {
       }}
       >
       {
+      (earningsStatus === "loading")
+      ? <SwiperSlide>
+          <div className="centeringDiv"><h1>Loading...</h1></div>
+        </SwiperSlide>
+      : (earningsError === null) 
+        ? earningsData.annualEarnings.map((item: EarningsStateAnnual) => {
+            return(
+              <SwiperSlide>
+                <div className="content">
+                  {                   
+                    Object
+                    .entries(item)
+                    .map(
+                      ([key, value]) => {
+                        return(
+                          <TableListItem type={key} value={value} />
+                        )
+                      }                   
+                    )                 
+                  }
+                </div>
+              </SwiperSlide>
+            )              
+          })
+        : (
+          <SwiperSlide>
+            <div className="centeringDiv"><h1>{earningsError}</h1></div>
+          </SwiperSlide>
+        )
+      }
+      {/* {
         !earningsError === null
         ? <SwiperSlide>
             <h1>{earningsError}</h1>
@@ -39,19 +71,22 @@ export const EarningsAnnualList = () => {
           return(
             <SwiperSlide>
               <div className="content">
-                <h3>
-                  <span className='dataName'>Fiscal Date End:</span>
-                  <span className='dataValue'>{item.fiscalDateEnding}</span>
-                </h3>
-                <h3>
-                  <span className='dataName'>Reported EPS:</span>
-                  <span className='dataValue'>{item.reportedEPS}</span>
-                </h3>
+                {                   
+                  Object
+                  .entries(item)
+                  .map(
+                    ([key, value]) => {
+                      return(
+                        <TableListItem type={key} value={value} />
+                      )
+                    }                   
+                  )                 
+                }
               </div>
             </SwiperSlide>
           )              
         })
-      }
+      } */}
       </Swiper>
     </>
   )
