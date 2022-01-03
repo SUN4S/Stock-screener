@@ -21,5 +21,5 @@ ALPHA_VANTAGE_API=<Your api key here>
 ```
 
 ## Compromises due to API limitations
-* The API only allows 5 requests/min, so implementing a continuous search functionality within the Header of the page was currently impractical. It was made into a seperate component within the page
+* The API only allows 5 requests/min, so implementing a continuous search functionality within the Header of the page was currently impractical. It was made into a seperate "Company Serach" component within the page
 * The search component within Fundamental and Chart headers only takes a companys' symbol ex.: AAPL, MSFT, TSLA, etc.
