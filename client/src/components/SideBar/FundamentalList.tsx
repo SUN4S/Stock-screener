@@ -30,7 +30,13 @@ export const FundamentalList: React.FC = () => {
       {/* Fundamental data container collapsed */}
       <ListItemButton onClick={handleClickFund}>
         <ListItemIcon>
-          <BarChartOutlinedIcon style={{ color: '#fff', float: 'right', fontSize: '2rem' }} />
+          <BarChartOutlinedIcon 
+            style={{ 
+              color: '#fff', 
+              float: 'right',
+              fontSize: '2rem' 
+              }} 
+            />
         </ListItemIcon>
         <ListItemText primary="Fundamental Data" />
         {openFund ? <ExpandLess /> : <ExpandMore />}

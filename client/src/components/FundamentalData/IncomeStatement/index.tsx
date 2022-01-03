@@ -56,17 +56,47 @@ export const IncomeStatement = () => {
   return (
     <>
       <Grid item xs={12} >
-          <Grid container justifyContent='space-between' sx={{ borderBottom: '2px solid #272b35', padding: '1rem 0', color: '#fff'}}>
-            <Grid item xl={7} lg={6} md={5} sm={12} xs={12} py={1}>
+          <Grid 
+            container 
+            alignItems='flex-end' 
+            justifyContent='space-between' 
+            sx={{ 
+              borderBottom: '2px solid #272b35', 
+              padding: '0 0 1rem', 
+              color: '#fff'
+            }}>
+            <Grid 
+              item 
+              xl={7} 
+              lg={6} 
+              md={5} 
+              sm={12} 
+              xs={12} 
+              py={1}>
               <div className='headerText'>
                 <h1>Income Sheet Data</h1>
-                <p>Search for a Companys' Income sheet data</p>
+                <p>Also known as the profit and loss statement or the statement of revenue and expense, the income statement primarily focuses on the company’s revenues and expenses during a particular period.</p>
               </div>
             </Grid>
-            <Grid item xl={4} lg={6} md={7} sm={12} xs={12} py={1}>
-              <Grid container className='searchInput' justifyContent="flex-end" spacing={2}>
+            <Grid 
+              item 
+              xl={4} 
+              lg={6} 
+              md={7} 
+              sm={12} 
+              xs={12} 
+              py={1}>
+              <Grid 
+                container 
+                className='searchInput' 
+                justifyContent="flex-end" 
+                style={{ maxHeight: '56px' }}>
                 <Grid item xs={3}>
-                  <FormControl sx={{ height: '100%', width: '100%'}}>          
+                  <FormControl 
+                  sx={{ 
+                    height: '56px', 
+                    width: '100%'
+                  }}>          
                     <Select
                       value={select}
                       sx={{ color: "primary.main" }}
@@ -77,7 +107,15 @@ export const IncomeStatement = () => {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={6} sx={{height: '100%', width: '100%'}} alignSelf='flex-end'>
+                <Grid 
+                  item 
+                  xs={6} 
+                  sx={{
+                    height: '56px',
+                    width: '100%', 
+                    padding: '0 1rem'
+                  }} 
+                  alignSelf='flex-end'>
                   <div className="form__group field">
                     <input
                       type="text"
@@ -91,13 +129,16 @@ export const IncomeStatement = () => {
                       />
                   </div>
                 </Grid>
-                <Grid item xs={3}>
+                <Grid 
+                  item 
+                  xs={3} 
+                  style={{ height: '56px' }}>
                   <LoadingButton
                     variant="outlined"
                     onClick={() => handleClick(input)}
                     loading={status === 'loading' ? true : false}
                     loadingPosition="center"
-                    style={{ height: '100%', width: '100%' }}
+                    style={{ width: '100%' }}
                   >
                     <SearchOutlinedIcon />
                   </LoadingButton>
@@ -106,13 +147,27 @@ export const IncomeStatement = () => {
             </Grid>
           </Grid>
       </Grid>
-      <Grid item className="incomeContainer" sx={{height: '85%'}} xs={12}>
+      <Grid 
+        item 
+        className="incomeContainer" 
+        sx={{height: '85%'}} 
+        xs={12}>
         <Container>
-          <Grid container xs={12} sx={{ overflowY: "hidden"}}>
-            <Grid item xs={12} alignSelf='flex-start' className="titleContainer">
+          <Grid 
+            container 
+            xs={12} 
+            sx={{ overflowY: "hidden"}}>
+            <Grid 
+              item 
+              xs={12} 
+              alignSelf='flex-start' 
+              className="titleContainer">
               <h2>Company Symbol: {incomeData.symbol}</h2>
             </Grid>
-            <Grid item xs={12} sx={{height: '100%'}}>
+            <Grid 
+              item 
+              xs={12} 
+              sx={{height: '100%'}}>
               {
                 select === "annualReports" 
                 ? (

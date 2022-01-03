@@ -96,17 +96,47 @@ export const TimeSeries = () => {
   return (
     <>
       <Grid item xs={12} >
-          <Grid container justifyContent='space-between' sx={{ borderBottom: '2px solid #272b35', padding: '1rem 0', color: '#fff'}}>
-            <Grid item xl={7} lg={6} md={5} sm={12} xs={12} py={1}>
+          <Grid 
+            container 
+            alignItems='flex-end' 
+            justifyContent='space-between' 
+            sx={{ 
+              borderBottom: '2px solid #272b35', 
+              padding: '0 0 1rem', 
+              color: '#fff'
+            }}>
+            <Grid 
+              item 
+              xl={7} 
+              lg={6} 
+              md={5} 
+              sm={12} 
+              xs={12} 
+              py={1}>
               <div className='headerText'>
                 <h1>Time chart</h1>
-                <p>Search for a Companys' chart data</p>
+                <p>Since price patterns are identified using a series of lines and/or curves, it is helpful to understand trendlines. Trendlines help technical analysts spot areas of support and resistance on a price chart.</p>
               </div>
             </Grid>
-            <Grid item xl={4} lg={6} md={7} sm={12} xs={12} py={1}>
-              <Grid container className='searchInput' justifyContent="flex-end" spacing={2}>
+            <Grid 
+              item 
+              xl={4} 
+              lg={6} 
+              md={7} 
+              sm={12} 
+              xs={12} 
+              py={1}>
+              <Grid 
+                container 
+                className='searchInput' 
+                justifyContent="flex-end" 
+                style={{ maxHeight: '56px' }}>
                 <Grid item xs={3}>
-                  <FormControl sx={{ height: '100%', width: '100%'}}>          
+                  <FormControl 
+                    sx={{ 
+                      height: '56px', 
+                      width: '100%'
+                    }}>          
                   <Select
                     value={select}
                     sx={{ color: "primary.main" }}
@@ -119,7 +149,15 @@ export const TimeSeries = () => {
                   </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={6} sx={{height: '100%', width: '100%'}} alignSelf='flex-end'>
+                <Grid 
+                  item 
+                  xs={6} 
+                  sx={{
+                    height: '56px', 
+                    width: '100%', 
+                    padding: '0 1rem'
+                  }} 
+                  alignSelf='flex-end'>
                   <div className="form__group field">
                     <input
                       type="text"
@@ -133,13 +171,19 @@ export const TimeSeries = () => {
                       />
                   </div>
                 </Grid>
-                <Grid item xs={3}>
+                <Grid 
+                  item 
+                  xs={3}
+                  sx={{ height: '56px'}} 
+                  py={0}>
                   <LoadingButton
                     variant="outlined"
                     onClick={() => handleClick(input, select)}
                     loading={status === 'loading' ? true : false}
                     loadingPosition="center"
-                    style={{ height: '100%', width: '100%' }}
+                    style={{ 
+                      width: '100%'
+                    }}
                   >
                     <SearchOutlinedIcon />
                   </LoadingButton>
@@ -148,7 +192,10 @@ export const TimeSeries = () => {
             </Grid>
           </Grid>
       </Grid>
-      <Grid item sx={{height: '85%'}} xs={12}>
+      <Grid 
+        item 
+        sx={{height: '85%'}} 
+        xs={12}>
         <Container>
           <Grid container className="chartContainer" >
             {

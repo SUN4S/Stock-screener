@@ -102,7 +102,11 @@ export const InterdayData = () => {
 
   return (
     <>
-      <Grid item xs={12} className="titleContainer" alignSelf='flex-start'>
+      <Grid 
+        item 
+        xs={12} 
+        className="titleContainer" 
+        alignSelf='flex-start'>
         <h2>Company Symbol: {
           (interdayError === null) 
             ? interdayData['Meta Data']['2. Symbol'].toUpperCase() 
@@ -115,10 +119,18 @@ export const InterdayData = () => {
           ? (<div className="centeringDiv"><h1>Loading...</h1></div>)
           : (interdayError === null) 
             ? <>
-                <Grid item xs={12} lg={3} className="mostRecent">
+                <Grid 
+                  item 
+                  xs={12} 
+                  lg={3} 
+                  className="mostRecent">
                   {recentData}
                 </Grid>
-                <Grid item xs={12} lg={9} className="drawChart">
+                <Grid 
+                  item 
+                  xs={12} 
+                  lg={9} 
+                  className="drawChart">
                   <Line options={options} data={data} />
                 </Grid>
               </>

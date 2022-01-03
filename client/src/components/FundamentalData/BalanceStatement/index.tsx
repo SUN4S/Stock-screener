@@ -57,17 +57,47 @@ export const BalanceStatement = () => {
   return (
     <>
       <Grid item xs={12} >
-          <Grid container justifyContent='space-between' sx={{ borderBottom: '2px solid #272b35', padding: '1rem 0', color: '#fff'}}>
-            <Grid item xl={7} lg={6} md={5} sm={12} xs={12} py={1}>
+          <Grid 
+            container 
+            alignItems='flex-end' 
+            justifyContent='space-between' 
+            sx={{ 
+              borderBottom: '2px solid #272b35', 
+              padding: '0 0 1rem', 
+              color: '#fff'
+            }}>
+            <Grid 
+              item 
+              xl={7} 
+              lg={6} 
+              md={5} 
+              sm={12} 
+              xs={12} 
+              py={1}>
               <div className='headerText'>
                 <h1>Balance Sheet Data</h1>
-                <p>Search for a Companys' Balance sheet data</p>
+                <p>In short, the balance sheet is a financial statement that provides a snapshot of what a company owns and owes, as well as the amount invested by shareholders.</p>
               </div>
             </Grid>
-            <Grid item xl={4} lg={6} md={7} sm={12} xs={12} py={1}>
-              <Grid container className='searchInput' justifyContent="flex-end" spacing={2}>
+            <Grid 
+              item 
+              xl={4} 
+              lg={6} 
+              md={7} 
+              sm={12} 
+              xs={12} 
+              py={1} >
+              <Grid 
+                container 
+                className='searchInput' 
+                justifyContent="flex-end" 
+                style={{ maxHeight: '56px' }}>
                 <Grid item xs={3}>
-                  <FormControl sx={{ height: '100%', width: '100%'}}>          
+                  <FormControl 
+                  sx={{ 
+                    height: '56px', 
+                    width: '100%'
+                  }}>          
                     <Select
                       value={select}
                       sx={{ color: "primary.main" }}
@@ -78,7 +108,15 @@ export const BalanceStatement = () => {
                     </Select>
                   </FormControl>
                 </Grid>
-                <Grid item xs={6} sx={{height: '100%', width: '100%'}} alignSelf='flex-end'>
+                <Grid 
+                  item 
+                  xs={6} 
+                  sx={{
+                    height: '56px', 
+                    width: '100%', 
+                    padding: '0 1rem'
+                  }} 
+                  alignSelf='flex-end'>
                   <div className="form__group field">
                     <input
                       type="text"
@@ -92,13 +130,19 @@ export const BalanceStatement = () => {
                       />
                   </div>
                 </Grid>
-                <Grid item xs={3}>
+                <Grid 
+                  item 
+                  xs={3} 
+                  sx={{ height: '56px'}} 
+                  py={0}>
                   <LoadingButton
                     variant="outlined"
                     onClick={() => handleClick(input)}
                     loading={status === 'loading' ? true : false}
                     loadingPosition="center"
-                    style={{ height: '100%', width: '100%' }}
+                    style={{ 
+                      width: '100%' 
+                    }}
                   >
                     <SearchOutlinedIcon />
                   </LoadingButton>
@@ -107,10 +151,21 @@ export const BalanceStatement = () => {
             </Grid>
           </Grid>
       </Grid>
-      <Grid item className="overviewContainer" sx={{height: '85%'}} xs={12}>
+      <Grid 
+        item 
+        className="overviewContainer" 
+        sx={{height: '85%'}} 
+        xs={12}>
         <Container>
-          <Grid container xs={12} sx={{ overflowY: "hidden"}}>
-            <Grid item xs={12} alignSelf='flex-start' className="titleContainer">
+          <Grid 
+            container 
+            xs={12} 
+            sx={{ overflowY: "hidden"}}>
+            <Grid 
+              item 
+              xs={12} 
+              alignSelf='flex-start' 
+              className="titleContainer">
               <h2>Company Symbol: {(balanceError === null) ? balanceData.symbol : '???'}</h2>
             </Grid>
             <Grid item xs={12} sx={{height: '100%'}}>

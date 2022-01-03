@@ -30,7 +30,13 @@ export const TimeSeriesList: React.FC = () => {
           onClick={(event: any) => handleListItemClick(event, 0)}
           >
           <ListItemIcon>
-            <SsidChartOutlinedIcon style={{ color: '#fff', float: 'right', fontSize: '2rem' }} />
+            <SsidChartOutlinedIcon 
+            style={{ 
+              color: '#fff', 
+              float: 'right', 
+              fontSize: '2rem' 
+              }}
+            />
           </ListItemIcon>
           <ListItemText primary="Chart" />
         </ListItemButton>

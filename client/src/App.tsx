@@ -21,17 +21,31 @@ import { TimeSeries } from './components/TimeSeries';
 export const App = () => {
   return (
     <Grid container spacing={0}>
-      <Grid item xs={12} lg={2} >
+      <Grid 
+        item 
+        xs={12} 
+        lg={2} 
+        >
           <SideBar />
       </Grid>
-      <Grid item xs={12} lg={10}
+      <Grid 
+        item 
+        xs={12} 
+        lg={10}
         sx={{
           textAlign: 'center',
           height: '95vh',
           borderRadius: '0px',
-          backgroundColor: '#1B2635'
+          backgroundColor: '#1B2635',
         }}>
-        <Grid container xs={12} py={2} px={4} sx={{height: '100%',}} alignContent='space-around' justifyContent="center">
+        <Grid 
+          container 
+          xs={12} 
+          py={2} 
+          px={4} 
+          sx={{height: '100%',}} 
+          alignContent='space-around' 
+          justifyContent="center">
           <Routes>
             <Route path="/" element={<CompanySearch />} />
             <Route path="/timeseries/*" element={<TimeSeries />} />
